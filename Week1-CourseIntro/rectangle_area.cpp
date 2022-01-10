@@ -44,7 +44,8 @@ int main(int argc, char **argv)
     unsigned length = length_generator(get_next_value);
     unsigned area = get_rectangle_area(length, width);
 
-    cout << "The area of a" << width << "by" << length << " rectangle is " << area << endl;
+    cout << "The area of a" << width << "by" << length <<
+      " rectangle is " << area << endl;
   }
   return 0;
 }
