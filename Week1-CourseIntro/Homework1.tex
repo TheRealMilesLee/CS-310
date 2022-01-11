@@ -96,7 +96,17 @@ bool goldbach()
 }
 \end{Verbatim}
 
-\answer This algorithm is unambiguous because the syntax for the operation is well-understood. But it's non-deterministic since it does not produces the same output for a given input, also it is infinite because it will never reached the terminated condition if the given input is bigger than 2. And this algorithm is not correct since it does not produces correct output for a given input.
+\answer This algorithm is unambiguous because the syntax for the operation is 
+clear and easy to understood. But it's non-deterministic since it does not produces 
+the same output for a given input, in fact, if the given input is an even number and 
+it's greater than 2, it would not have any output. This algorithm is also infinite 
+because it would never reached the terminated condition if the given input is a even 
+number and greater than 2. Lastly this algorithm does not correct since it does not 
+produces correct output for a given input. At this example, the input is 4, which is 
+an even number, so the while loop will goes on and on and never stop, thus, the while
+loop become a infinite loop and doesn't have any output. According to the analysis 
+above, we can conclude that this algorithm is unambiguous, non-deterministic, 
+infinite and not correct.
 
 \problem{3} What is the hexadecimal representation of $724_{10}$?
 
@@ -123,12 +133,13 @@ Thus we have:
 \end{split}
 \end{equation*}
 
-And thus we have $724_{10} = 2d4_{16}$.
+And thus we have $724_{10} = 2d4_{16} \\$.
 
 \problem{4} Based on the hexadecimal value found in the previous
 solution, what is the binary representation of $724_{10}$?
 
-\answer According to the previous solution, we have the hex value 0x2d4. So we could convert the hex to binary one digit by one digit. So here is a binary to hex table: 
+\answer According to the previous solution, we have the hex value 0x2d4. So we could 
+convert the hex to binary one digit by one digit. So here is a binary to hex table: 
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -143,18 +154,18 @@ $0111 = 7$     &  $1111 = f$\\
 \hline
 \end{tabular}
 \end{center}
-Since $2_{16} = 0010$, $d_{16} = 1101$ and $4_{16} = 0100$. So the binary of $724_{10}$ = 0010 1101 0100.
+Since $2_{16} = 0010$, $d_{16} = 1101$ and $4_{16} = 0100$. So the binary of 
+$724_{10}$ = 0010 1101 0100.
 
 \problem{5} What is the decimal representation of \texttt{0x2b3a}?
 
-\answer According to the table above, we could know that b in decimal is 11 and a in decimal is 10. So we have the following
-
+\answer According to the table above, we could know that b in decimal is 11 and a in 
+decimal is 10. So we have the following
 \begin{align*}
 2b3a_{16} &= 2 \cdot 16^3 + 11 \cdot 16^2 + 3 \cdot 16^1 + 10 \cdot 16^0 \\
 & = 2 \cdot 4096 + 11 \cdot 256 + 3\cdot 16 + 10 \\
 & = 8192 + 2816 + 48 +10 \\
-& = 11066\\
+& = 11066
 \end{align*}
-
 So, the decimal representation of \texttt{0x2b3a} is 11066.
 \end{document}
