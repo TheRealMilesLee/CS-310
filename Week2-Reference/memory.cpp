@@ -24,7 +24,7 @@ uint16_t foo(uint16_t a, uint16_t &b);
  */
 void bar(uint16_t &x, uint16_t &y);
 
-int main(int argc, char*argv)
+int main()
 {
   const uint16_t A_VALUE = 10;
   uint16_t i = 10;
