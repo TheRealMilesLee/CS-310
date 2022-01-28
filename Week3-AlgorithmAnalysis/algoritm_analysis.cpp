@@ -29,21 +29,27 @@ int main(int argc, char **argv)
 
   // Setup the value vector and random generator
   vector<unsigned> values;
-  default_random_engine get_next_value(static_cast<unsigned>(chrono::system_clock::now().time_since_epoch().count()));
-  uniform_int_distribution<unsigned> generator(0, 999999);
-
+  /*
+  default_random_engine get_next_value(static_cast<unsigned>
+    (chrono::system_clock::now().time_since_epoch().count()));
+  uniform_int_distribution<unsigned> generator(0, 9);
+*/
+  // Accept from input to get the number of values that needs to generate
   unsigned number_of_values = static_cast<unsigned>(stoul(argv[1]));
 
+  // Save generated value into the vector
   for (unsigned value = 0; value < number_of_values; value++)
   {
-    values.push_back(generator(get_next_value));
+    //values.push_back(generator(get_next_value));
+    values.push_back(value);
   }
 
-  foo(values);
+  //foo(values);
 
-  for (auto v : values)
+  // output the current vector to the terminal
+  for (auto current_value : values)
   {
-    cout << v << ' ';
+    cout << current_value << ' ';
   }
   cout << endl;
   return 0;
