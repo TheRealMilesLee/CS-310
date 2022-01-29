@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   }
 
   unsigned operations_total = foo(values);
-  cerr << argv[0] << " " << operations_total << endl;
+  cerr << argv[1] << " " << operations_total << endl;
 
   for (auto current_value : values) {
     cout << current_value << ' ';
