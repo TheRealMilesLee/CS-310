@@ -1,7 +1,7 @@
 /**
  * @file algorithm_analysis.cpp
  * @author Hengyi Li
- * @brief This file is to show the process of sort
+ * @brief This file is to sort an unordered array
  * @version 0.3.1
  * @date 2022-01-29
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved.
