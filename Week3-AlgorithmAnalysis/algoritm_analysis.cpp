@@ -35,8 +35,10 @@ int main(int argc, char **argv)
   // Wrong input handling
   if (argc != 2)
   {
-    cerr << "Usage: " << argv[0] << " n where n is the number of values to use"
-      << endl;
+    cerr << "Usage: "
+          << argv[0]
+          << " n where n is the number of values to use"
+          << endl;
     return 1;
   }
 
@@ -55,7 +57,7 @@ int main(int argc, char **argv)
   }
 
   unsigned operations_total = foo(values);
-  cout << number_of_values << " " << operations_total << endl;
+  cerr << argv[0] << " " << operations_total << endl;
 
   for (auto current_value : values) {
     cout << current_value << ' ';
@@ -71,56 +73,56 @@ unsigned foo(vector<unsigned> &array)
   operation_count++; // array size assignment
   for (size_t start = 0; start < array_size - 1; start++)
   {
-    operation_count += 2; // for header
+    operation_count += 2; // for loop header
     unsigned item = array.at(start);
-    operation_count++; //
+    operation_count++; // value at index assignment
     size_t position = start;
-    operation_count++;
+    operation_count++; // index assignment to current position
     for (size_t index = start + 1; index < array_size; index++)
     {
-      operation_count += 2;
+      operation_count += 2; // for loop header
       if (array.at(index) < item)
       {
-        operation_count++;
+        operation_count++; // value comparison
         position++;
-        operation_count++;
+        operation_count++; // position index increment
       }
     }
 
     if (position != start)
     {
-      operation_count++;
+      operation_count++; // index comparison
       while (item == array.at(position))
       {
-        operation_count++;
+        operation_count++; // value comparison
         position++;
-        operation_count++;
+        operation_count++; // position index increment
       }
       swap(array.at(position), item);
-      operation_count += 2;
+      operation_count += 2; // value swap
       while (position != start)
       {
-        operation_count++;
+        operation_count++; // while loop header
         position = start;
-        operation_count++;
+        operation_count++; // position index assignment
         for (size_t index = start + 1; index < array_size; index++)
         {
-          operation_count += 2;
+          operation_count += 2; // for loop header
           if (array.at(index) < item)
           {
-            operation_count++;
+            operation_count++; // value comparison
             position++;
-            operation_count++;
+            operation_count++; // position index increment
           }
         }
         while (item == array.at(position))
         {
-          operation_count++;
+          operation_count++; // while loop header
           position++;
-          operation_count++;
+          operation_count++; // position index increment
         }
         swap(array.at(position), item);
-        operation_count += 2;
+        operation_count += 2; // value swap
       }
     }
   }
