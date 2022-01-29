@@ -1,29 +1,41 @@
 /**
  * @file algorithm_analysis.cpp
  * @author Hengyi Li
- * @brief This file is to show the process of selection sort
- * @version 0.1
- * @date 2022-01-27
+ * @brief This file is to show the process of sort
+ * @version 0.3.1
+ * @date 2022-01-29
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved.
  */
 #include <chrono>
 #include <iostream>
 #include <random>
 #include <vector>
+#include <string>
+
 using namespace std;
 
 /**
- * @brief  This function is to sort the unordered array by using the selection sort.
- * @param array is the unsorted array that contains the unsigned numbers
+ * @brief This function is to sort the unordered array by
+ * 1. Select the number S which is the number in current index
+ *    a. Store that select number into a local variable named item
+ * 2. Loop through the array
+ *    a. Find the first exists number N that is smaller than S
+ *    b. Save the index of S into local variable named position
+ * 3. Exchange the value
+ *    a. call swap to replace the value at index of S by N
+ *    b. reset the position, replace the value at index of N by S
+ * 4. Increment the index to find the next one.
+ * @param array is the reference of unsorted array
  */
-void selection_sort(vector<unsigned> &array);
+void exchange_sort(vector<unsigned> &array);
 
 int main(int argc, char **argv)
 {
   // Wrong input handling
   if (argc != 2)
   {
-    cerr << "Usage: " << argv[0] << " n where n is the number of values to use" << endl;
+    cerr << "Usage: " << argv[0] << " n where n is the number of values to use"
+      << endl;
     return 1;
   }
 
@@ -31,21 +43,18 @@ int main(int argc, char **argv)
   vector<unsigned> values;
   default_random_engine get_next_value(static_cast<unsigned>
     (chrono::system_clock::now().time_since_epoch().count()));
-  uniform_int_distribution<unsigned> generator(0, 9);
+  uniform_int_distribution<unsigned> generator(0, 100);
 
   // Accept from input to get the number of values that needs to generate
   unsigned number_of_values = static_cast<unsigned>(stoul(argv[1]));
 
-  // Save generated value into the vector
   for (unsigned value = 0; value < number_of_values; value++)
   {
     values.push_back(generator(get_next_value));
   }
 
- // Perform the merge sort here.
-  selection_sort(values);
+  exchange_sort(values);
 
-  // output the current vector to the terminal
   for (auto current_value : values)
   {
     cout << current_value << ' ';
@@ -54,7 +63,7 @@ int main(int argc, char **argv)
   return 0;
 }
 
-void selection_sort(vector<unsigned> &array)
+void exchange_sort(vector<unsigned> &array)
 {
   size_t array_size = array.size();
 
@@ -62,9 +71,8 @@ void selection_sort(vector<unsigned> &array)
   {
     unsigned item = array.at(start);
     size_t position = start;
-    // Compare each element with the rest of the array, if the current value
-    // is bigger than compare value, increment the position
-    for (size_t index = start + 1; index < array_size; index++) {
+    for (size_t index = start + 1; index < array_size; index++)
+    {
       if (array.at(index) < item)
       {
         position++;
