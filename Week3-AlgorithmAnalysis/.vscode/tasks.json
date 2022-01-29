@@ -9,7 +9,12 @@
         "-g",
         "${file}",
         "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
+        "${fileDirname}/${fileBasenameNoExtension}",
+        "-pedantic-errors",
+        "-Weverything",
+        "-Wno-poison-system-directories",
+        "-Wno-c++98-compat",
+        "-std=c++11"
       ],
       "options": {
         "cwd": "${fileDirname}"

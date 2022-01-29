@@ -62,8 +62,9 @@ void foo(vector<unsigned> &array)
   {
     unsigned item = array.at(start);
     size_t position = start;
-    for (size_t index = start + 1; index < array_size; index++)
-    {
+    // Compare each element with the rest of the array, if the current value
+    // is bigger than compare value, increment the position
+    for (size_t index = start + 1; index < array_size; index++) {
       if (array.at(index) < item)
       {
         position++;
