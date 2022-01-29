@@ -1,7 +1,7 @@
 /**
  * @file algorithm_analysis.cpp
  * @author Hengyi Li
- * @brief This file is to show the process of merge sort
+ * @brief This file is to show the process of selection sort
  * @version 0.1
  * @date 2022-01-27
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved.
@@ -13,10 +13,10 @@
 using namespace std;
 
 /**
- * @brief  This function is to perform the merge sort
+ * @brief  This function is to sort the unordered array by using the selection sort.
  * @param array is the unsorted array that contains the unsigned numbers
  */
-void foo(vector<unsigned> &array);
+void selection_sort(vector<unsigned> &array);
 
 int main(int argc, char **argv)
 {
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   }
 
  // Perform the merge sort here.
-  foo(values);
+  selection_sort(values);
 
   // output the current vector to the terminal
   for (auto current_value : values)
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
   return 0;
 }
 
-void foo(vector<unsigned> &array)
+void selection_sort(vector<unsigned> &array)
 {
   size_t array_size = array.size();
 
