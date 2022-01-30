@@ -52,8 +52,7 @@ int main(int argc, char **argv)
 
   for (unsigned value = 0; value < number_of_values; value++)
   {
-    //values.push_back(generator(get_next_value));
-    values.push_back(value);
+    values.push_back(generator(get_next_value));
   }
   foo(values);
 
