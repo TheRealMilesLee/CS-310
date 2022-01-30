@@ -56,7 +56,8 @@ int main(int argc, char **argv)
   }
   foo(values);
 
-  for (auto current_value : values) {
+  for (auto current_value : values)
+  {
     cout << current_value << ' ';
   }
   cout << endl;
