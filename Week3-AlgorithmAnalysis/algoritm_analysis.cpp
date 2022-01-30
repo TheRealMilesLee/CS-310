@@ -26,9 +26,8 @@ using namespace std;
  *    b. reset the position, replace the value at index of N by S
  * 4. Increment the index to find the next one.
  * @param array is the reference of unsorted array
- * @return the number of the basic operations performed
  */
-unsigned foo(vector<unsigned> &array);
+void foo(vector<unsigned> &array);
 
 int main(int argc, char **argv)
 {
@@ -53,11 +52,9 @@ int main(int argc, char **argv)
 
   for (unsigned value = 0; value < number_of_values; value++)
   {
-    values.push_back(generator(get_next_value));
+    //values.push_back(generator(get_next_value));
   }
-
-  unsigned operations_total = foo(values);
-  cerr << argv[1] << " " << operations_total << endl;
+  foo(values);
 
   for (auto current_value : values) {
     cout << current_value << ' ';
@@ -66,7 +63,7 @@ int main(int argc, char **argv)
   return 0;
 }
 
-unsigned foo(vector<unsigned> &array)
+void foo(vector<unsigned> &array)
 {
   unsigned operation_count = 0;
   size_t array_size = array.size();
@@ -126,5 +123,5 @@ unsigned foo(vector<unsigned> &array)
       }
     }
   }
-  return operation_count;
+  cerr << array_size << " " << operation_count << endl;
 }
