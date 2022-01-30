@@ -52,8 +52,19 @@ int main(int argc, char **argv)
 
   for (unsigned value = 0; value < number_of_values; value++)
   {
-    values.push_back(generator(get_next_value));
+    //values.push_back(generator(get_next_value));
   }
+  values.push_back(10);
+  values.push_back(9);
+  values.push_back(8);
+  values.push_back(7);
+  values.push_back(11);
+  values.push_back(5);
+  values.push_back(4);
+  values.push_back(3);
+  values.push_back(2);
+  values.push_back(1);
+
   foo(values);
 
   for (auto current_value : values)
@@ -79,23 +90,26 @@ void foo(vector<unsigned> &array)
     for (size_t index = start + 1; index < array_size; index++)
     {
       operation_count += 2; // for loop header
+      operation_count++;    // value comparison
       if (array.at(index) < item)
       {
-        operation_count++; // value comparison
         position++;
         operation_count++; // position index increment
       }
     }
+    operation_count += 2;  // for loop last time
 
+    operation_count++;  // index comparison
     if (position != start)
     {
-      operation_count++; // index comparison
       while (item == array.at(position))
       {
         operation_count++; // value comparison
         position++;
         operation_count++; // position index increment
       }
+      operation_count++;  // while loop last time
+
       swap(array.at(position), item);
       operation_count += 2; // value swap
       while (position != start)
@@ -106,23 +120,27 @@ void foo(vector<unsigned> &array)
         for (size_t index = start + 1; index < array_size; index++)
         {
           operation_count += 2; // for loop header
+          operation_count++;    // value comparison
           if (array.at(index) < item)
           {
-            operation_count++; // value comparison
             position++;
             operation_count++; // position index increment
           }
         }
+        operation_count += 2;  // for loop last time
         while (item == array.at(position))
         {
           operation_count++; // while loop header
           position++;
           operation_count++; // position index increment
         }
+        operation_count++;  // while loop last time
         swap(array.at(position), item);
         operation_count += 2; // value swap
       }
+      operation_count++;  // while loop last time
     }
   }
+  operation_count += 2;  // for loop last time
   cerr << array_size << " " << operation_count << endl;
 }
