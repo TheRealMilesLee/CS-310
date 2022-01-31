@@ -9,8 +9,8 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -34,36 +34,24 @@ int main(int argc, char **argv)
   // Wrong input handling
   if (argc != 2)
   {
-    cerr << "Usage: "
-          << argv[0]
-          << " n where n is the number of values to use"
-          << endl;
+    cerr << "Usage: " << argv[0] << " n where n is the number of values to use"
+         << endl;
     return 1;
   }
 
   // Setup the value vector and random generator
   vector<unsigned> values;
-  default_random_engine get_next_value(static_cast<unsigned>
-    (chrono::system_clock::now().time_since_epoch().count()));
+  default_random_engine get_next_value(static_cast<unsigned>(
+      chrono::system_clock::now().time_since_epoch().count()));
   uniform_int_distribution<unsigned> generator(0, 999999);
 
   // Accept from input to get the number of values that needs to generate
   unsigned number_of_values = static_cast<unsigned>(stoul(argv[1]));
 
-  for (unsigned value = 0; value < number_of_values; value++)
+  for (unsigned value = 1; value < number_of_values; value++)
   {
-    //values.push_back(generator(get_next_value));
+     values.push_back(generator(get_next_value));
   }
-  values.push_back(10);
-  values.push_back(9);
-  values.push_back(8);
-  values.push_back(7);
-  values.push_back(11);
-  values.push_back(5);
-  values.push_back(4);
-  values.push_back(3);
-  values.push_back(2);
-  values.push_back(1);
 
   foo(values);
 
@@ -77,7 +65,7 @@ int main(int argc, char **argv)
 
 void foo(vector<unsigned> &array)
 {
-  unsigned operation_count = 0;
+  uint64_t operation_count = 0;
   size_t array_size = array.size();
   operation_count++; // array size assignment
   for (size_t start = 0; start < array_size - 1; start++)
@@ -90,28 +78,29 @@ void foo(vector<unsigned> &array)
     for (size_t index = start + 1; index < array_size; index++)
     {
       operation_count += 2; // for loop header
-      operation_count++;    // value comparison
+      operation_count += 2; // if statement comparison and array access
       if (array.at(index) < item)
       {
         position++;
         operation_count++; // position index increment
       }
     }
-    operation_count += 2;  // for loop last time
+    operation_count += 2; // for loop last time
 
-    operation_count++;  // index comparison
+    operation_count++; // index comparison
     if (position != start)
     {
       while (item == array.at(position))
       {
-        operation_count++; // value comparison
+        operation_count += 2; // while statement compare and array access
         position++;
         operation_count++; // position index increment
       }
-      operation_count++;  // while loop last time
+      operation_count += 2; // while statement compare and array access
 
       swap(array.at(position), item);
       operation_count += 2; // value swap
+
       while (position != start)
       {
         operation_count++; // while loop header
@@ -120,27 +109,29 @@ void foo(vector<unsigned> &array)
         for (size_t index = start + 1; index < array_size; index++)
         {
           operation_count += 2; // for loop header
-          operation_count++;    // value comparison
+          operation_count += 2; // if compare and array access
           if (array.at(index) < item)
           {
             position++;
             operation_count++; // position index increment
           }
         }
-        operation_count += 2;  // for loop last time
+        operation_count += 2; // for loop last time
+
         while (item == array.at(position))
         {
-          operation_count++; // while loop header
+          operation_count += 2; // while compare and array access
           position++;
           operation_count++; // position index increment
         }
-        operation_count++;  // while loop last time
+        operation_count += 2; // while loop compare and array access last time
+
         swap(array.at(position), item);
         operation_count += 2; // value swap
       }
-      operation_count++;  // while loop last time
+      operation_count++; // while loop last time
     }
   }
-  operation_count += 2;  // for loop last time
+  operation_count += 2; // for loop last time
   cerr << array_size << " " << operation_count << endl;
 }
