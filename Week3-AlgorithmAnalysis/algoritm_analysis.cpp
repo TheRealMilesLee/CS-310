@@ -49,7 +49,7 @@ int main(int argc, char **argv)
   // Accept from input to get the number of values that needs to generate
   unsigned number_of_values = static_cast<unsigned>(stoul(argv[1]));
 
-  for (unsigned value = 1; value < number_of_values; value++)
+  for (unsigned value = 0; value < number_of_values; value++)
   {
     values.push_back(generator(get_next_value));
   }
