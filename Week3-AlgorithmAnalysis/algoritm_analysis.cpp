@@ -34,15 +34,16 @@ int main(int argc, char **argv)
   // Wrong input handling
   if (argc != 2)
   {
-    cerr << "Usage: " << argv[0] << " n where n is the number of values to use"
-      << endl;
+    cerr << "Usage: " << argv[0]
+            << " n where n is the number of values to use"
+            << endl;
     return 1;
   }
 
   // Setup the value vector and random generator
   vector<unsigned> values;
-  default_random_engine get_next_value(static_cast<unsigned>(
-    chrono::system_clock::now().time_since_epoch().count()));
+  default_random_engine get_next_value(static_cast<unsigned>
+    (chrono::system_clock::now().time_since_epoch().count()));
   uniform_int_distribution<unsigned> generator(0, 999999);
 
   // Accept from input to get the number of values that needs to generate
@@ -52,7 +53,6 @@ int main(int argc, char **argv)
   {
     values.push_back(generator(get_next_value));
   }
-
 
   foo(values);
 
@@ -67,6 +67,7 @@ int main(int argc, char **argv)
 void foo(vector<unsigned> &array)
 {
   uint64_t operation_count = 0;
+
   size_t array_size = array.size();
   operation_count++; // array size assignment
 
@@ -135,7 +136,7 @@ void foo(vector<unsigned> &array)
           position++;
           operation_count++; // position index increment
         }
-        operation_count += 2; // while loop compare and array access last time
+        operation_count += 2; // while loop compare, array access last time
 
         swap(array.at(position), item);
         operation_count += 2; // value swap
