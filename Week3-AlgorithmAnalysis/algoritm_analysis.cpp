@@ -35,14 +35,14 @@ int main(int argc, char **argv)
   if (argc != 2)
   {
     cerr << "Usage: " << argv[0] << " n where n is the number of values to use"
-         << endl;
+      << endl;
     return 1;
   }
 
   // Setup the value vector and random generator
   vector<unsigned> values;
   default_random_engine get_next_value(static_cast<unsigned>(
-      chrono::system_clock::now().time_since_epoch().count()));
+    chrono::system_clock::now().time_since_epoch().count()));
   uniform_int_distribution<unsigned> generator(0, 999999);
 
   // Accept from input to get the number of values that needs to generate
@@ -50,8 +50,9 @@ int main(int argc, char **argv)
 
   for (unsigned value = 1; value < number_of_values; value++)
   {
-     values.push_back(generator(get_next_value));
+    values.push_back(generator(get_next_value));
   }
+
 
   foo(values);
 
@@ -68,16 +69,21 @@ void foo(vector<unsigned> &array)
   uint64_t operation_count = 0;
   size_t array_size = array.size();
   operation_count++; // array size assignment
+
   for (size_t start = 0; start < array_size - 1; start++)
   {
     operation_count += 2; // for loop header
+
     unsigned item = array.at(start);
-    operation_count++; // value at index assignment
+    operation_count += 2; // value at index assignment and array access
+
     size_t position = start;
     operation_count++; // index assignment to current position
+
     for (size_t index = start + 1; index < array_size; index++)
     {
       operation_count += 2; // for loop header
+
       operation_count += 2; // if statement comparison and array access
       if (array.at(index) < item)
       {
@@ -87,12 +93,13 @@ void foo(vector<unsigned> &array)
     }
     operation_count += 2; // for loop last time
 
-    operation_count++; // index comparison
+    operation_count++; // if statement comparison
     if (position != start)
     {
       while (item == array.at(position))
       {
         operation_count += 2; // while statement compare and array access
+
         position++;
         operation_count++; // position index increment
       }
@@ -104,11 +111,14 @@ void foo(vector<unsigned> &array)
       while (position != start)
       {
         operation_count++; // while loop header
+
         position = start;
         operation_count++; // position index assignment
+
         for (size_t index = start + 1; index < array_size; index++)
         {
           operation_count += 2; // for loop header
+
           operation_count += 2; // if compare and array access
           if (array.at(index) < item)
           {
@@ -121,6 +131,7 @@ void foo(vector<unsigned> &array)
         while (item == array.at(position))
         {
           operation_count += 2; // while compare and array access
+
           position++;
           operation_count++; // position index increment
         }
