@@ -1,15 +1,12 @@
 /**
- * Provide a priority queue based on an unsorted vector.
- * This implementation also provides a field for counting basic operations.
- * @author Your Name
- * @version The date you last modify this code
- */
-
-/**
- * @brief This file provide a priority queue based on an unsorted vector and provides a field for  * counting basic operations
+ * @file pq.h
  * @author Hengyi Li
- * @version 0.0.1.23 Alpha
- * @copyright Copyright (c). 2022 Hengyi Li. All rights preserved
+ * @brief   Provide a priority queue based on an unsorted vector.
+ * This implementation also provides a field for counting basic operations.
+ * @version 0.1.0 Alpha
+ * @date 2022-02-15
+ * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved
+ *
  */
 #ifndef MY_PQ
 #define MY_PQ
@@ -21,13 +18,9 @@
 
 class PriorityQueue
 {
-private:
-  std::vector<unsigned> array;
-  uint64_t op_count;
-
 public:
 /**
- * @brief Priority Queue constructor
+ * @brief Constructor for an empty priority queue
  */
   PriorityQueue() : op_count{0} {}
 
@@ -41,6 +34,34 @@ public:
     op_count++; // one operation for push_back
   }
 
+  /**
+   * Remove and return the maximum-priority job in the queue.
+   * @return the priority of the removed job
+   */
+  unsigned pop()
+  {
+    size_t max_position = array.size();
+    unsigned max_value = 0;
+    for (size_t index = 0; index < array.size(); index++)
+    {
+      op_count += 2; // for loop header
+      if (array.at(index) > max_value)
+      {
+        max_value = array.at(index);
+        max_position = index;
+      }
+    }
+    op_count += 2; // for loop header last time
+
+    assert(max_position != array.size()); // no op_count for sanity check
+
+    for (size_t index = max_position; index < array.size() - 1; index++)
+    {
+      array.at(index) = array.at(index + 1);
+    }
+    array.pop_back();
+    return max_value;
+  }
 
   /**
    * Report if the queue is empty
@@ -68,5 +89,9 @@ public:
   {
     return op_count;
   }
+
+private:
+  std::vector<unsigned> array;
+  uint64_t op_count;
 };
 #endif

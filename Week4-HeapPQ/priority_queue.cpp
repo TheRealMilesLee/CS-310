@@ -23,11 +23,11 @@ int main()
   pq.push(1);
   pq.push(183);
 
-  while (!pq.is_empty())
-  {
-    cout << pq.pop() << endl;
-  }
 
+    while (!pq.is_empty())
+    {
+      cout << pq.pop() << endl;
+    }
   uint64_t basic_operations = pq.get_op_count();
   cerr << 12 << ' ' << basic_operations << endl;
   return 0;
