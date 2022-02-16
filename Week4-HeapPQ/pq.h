@@ -34,20 +34,7 @@ private:
       current_index = last_index;
       last_index = (last_index - 1) / 2;
     }
-
-    size_t current_position = size() - 1;
-    size_t last_position = current_position - 1;
-    while (current_position > 0)
-    {
-      if (array.at(current_position) > array.at (last_position))
-      {
-        std::swap(array.at(current_position), array.at(last_position));
-      }
-      current_position--;
-      last_position = current_position - 1;
-    }
-
-  }
+}
 
 public:
 /**
