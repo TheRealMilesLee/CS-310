@@ -23,7 +23,6 @@ int main()
   pq.push(1);
   pq.push(183);
 
-  pq.bubble_up();
   while (!pq.is_empty())
   {
     cout << pq.pop() << endl;
