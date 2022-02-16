@@ -23,17 +23,30 @@ private:
   uint64_t op_count;
   void bubble_up()
   {
-    size_t index = size() - 1;
-    size_t last_index = (index - 1) / 2;
-    while (index != 0)
+    size_t current_index = size() - 1;
+    size_t last_index = (current_index - 1) / 2;
+    while (current_index > 0)
     {
-      if (array.at(last_index) < array.at(index))
+      if (array.at(current_index) > array.at(last_index))
       {
-        std::swap(array.at(index), array.at(last_index));
-        index = last_index;
+        std::swap(array.at(current_index), array.at(last_index));
       }
-      index--;
+      current_index = last_index;
+      last_index = (last_index - 1) / 2;
     }
+
+    size_t current_position = size() - 1;
+    size_t last_position = current_position - 1;
+    while (current_position > 0)
+    {
+      if (array.at(current_position) > array.at (last_position))
+      {
+        std::swap(array.at(current_position), array.at(last_position));
+      }
+      current_position--;
+      last_position = current_position - 1;
+    }
+
   }
 
 public:
