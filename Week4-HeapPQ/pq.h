@@ -18,6 +18,9 @@
 
 class PriorityQueue
 {
+private:
+  std::vector<unsigned> array;
+  uint64_t op_count;
 public:
 /**
  * @brief Constructor for an empty priority queue
@@ -63,6 +66,28 @@ public:
     return max_value;
   }
 
+  void percolate_down()
+  {
+    for (size_t index = 0; index < size(); index++)
+    {
+
+    }
+  }
+
+  void bubble_up()
+  {
+    size_t index = size() - 1;
+    size_t last_index = (index - 1) / 2;
+    while (index != 0)
+    {
+      if (array.at(last_index) < array.at(index))
+      {
+        std::swap(array.at(index), array.at(last_index));
+        index = last_index;
+      }
+      index--;
+    }
+  }
   /**
    * Report if the queue is empty
    * @return true if empty, false otherwise
@@ -90,8 +115,6 @@ public:
     return op_count;
   }
 
-private:
-  std::vector<unsigned> array;
-  uint64_t op_count;
+
 };
 #endif
