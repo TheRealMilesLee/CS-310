@@ -23,18 +23,23 @@ private:
   uint64_t op_count;
   void bubble_up()
   {
-    op_count += 3;
+    op_count += 3; // arithmetic and assignment
     size_t current_index = size() - 1;
-
+    op_count += 3; // arithmetic and assignment
     size_t last_index = (current_index - 1) / 2;
     while (current_index > 0)
     {
+      op_count += 1; // while header
+      op_count += 3; // If compare and array access
       if (array.at(current_index) > array.at(last_index))
       {
         std::swap(array.at(current_index), array.at(last_index));
+        op_count += 2; // swap
       }
       current_index = last_index;
+      op_count++; // Assignment count
       last_index = (last_index - 1) / 2;
+      op_count += 3; // minus, divide and assignment
     }
 }
   void percolate_down()
