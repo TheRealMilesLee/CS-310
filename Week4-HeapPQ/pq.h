@@ -23,7 +23,9 @@ private:
   uint64_t op_count;
   void bubble_up()
   {
+    op_count += 3;
     size_t current_index = size() - 1;
+  
     size_t last_index = (current_index - 1) / 2;
     while (current_index > 0)
     {
@@ -35,6 +37,32 @@ private:
       last_index = (last_index - 1) / 2;
     }
 }
+  void percolate_down()
+  {
+    size_t current_index = 0;
+    size_t subchild_left = 2 * current_index + 1;
+    size_t subchild_right = 2 * current_index + 2;
+    while (current_index < size() - 1 && subchild_left < size() && subchild_right < size())
+    {
+      op_count += 3;
+      if (array.at(current_index) < array.at(subchild_left))
+      {
+        std::swap(array.at(current_index), array.at(subchild_left));
+        current_index = subchild_left;
+      }
+      else if (array.at(current_index) < array.at(subchild_right))
+      {
+        std::swap(array.at(current_index), array.at(subchild_right));
+        current_index = subchild_right;
+      }
+      else
+      {
+        current_index++;
+      }
+      subchild_left = 2 * current_index + 1;
+      subchild_right = 2 * current_index + 2;
+    }
+  }
 
 public:
 /**
@@ -79,6 +107,7 @@ public:
       array.at(index) = array.at(index + 1);
     }
     array.pop_back();
+    percolate_down();
     return max_value;
   }
 
