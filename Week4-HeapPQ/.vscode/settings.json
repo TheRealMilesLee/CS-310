@@ -97,5 +97,8 @@
     "slist": "cpp",
     "stop_token": "cpp",
     "cfenv": "cpp"
-  }
+  },
+  "cSpell.words": [
+    "stoul"
+  ]
 }

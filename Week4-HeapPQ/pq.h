@@ -23,67 +23,71 @@ private:
   uint64_t op_count;
   void bubble_up()
   {
-    op_count += 2; // minus and assignment
+    // Initial setup, 5 ops in total
     size_t current_index = size() - 1;
+    op_count += 2; // minus and assignment
+    size_t father_index = (current_index - 1) / 2;
     op_count += 3; // arithmetic and assignment
-    size_t last_index = (current_index - 1) / 2;
+
     while (current_index > 0)
     {
-      op_count += 1; // while header
+      op_count++; // while header
       op_count += 3; // If compare and array access
-      if (array.at(current_index) > array.at(last_index))
+      if (array.at(current_index) > array.at(father_index))
       {
-        std::swap(array.at(current_index), array.at(last_index));
+        std::swap(array.at(current_index), array.at(father_index));
         op_count += 2; // swap
       }
-      current_index = last_index;
+      current_index = father_index;
       op_count++; // Assignment count
-      last_index = (last_index - 1) / 2;
+      father_index = (father_index - 1) / 2;
       op_count += 3; // minus, divide and assignment
     }
-    op_count += 1; // while last time
+    op_count++; // while last time
 }
+
   void percolate_down()
   {
     size_t current_index = 0;
-    op_count++;    // assignment
+   op_count++; //assignment
 
     size_t subchild_left = 2 * current_index + 1;
-    op_count += 3; // arithmetic and assignment
+   op_count += 3; //arithmetic and assignment
 
     size_t subchild_right = 2 * current_index + 2;
-    op_count += 3; // arithmetic and assignment
+    op_count += 3;  //arithmetic and assignment
 
-    while (current_index < size() - 1 && subchild_left < size() && subchild_right < size())
+    while (current_index < size() - 1 && subchild_left < size()
+    && subchild_right < size())
     {
       op_count += 6; // while header
-      if (array.at(current_index) < array.at(subchild_left)
-          && array.at(subchild_left) > array.at(subchild_right))
+      op_count += 7; // array access and compare
+      if (array.at(current_index) < array.at(subchild_left) && array.at(subchild_left) >
+      array.at(subchild_right))
       {
-        op_count += 7; // array access and compare
         std::swap(array.at(current_index), array.at(subchild_left));
         op_count += 2; // swap
         current_index = subchild_left;
-        op_count++; // assignment
+        op_count++; //assignment
       }
-      else if (array.at(current_index) < array.at(subchild_right)
-                  && array.at(subchild_right) > array.at(subchild_left))
-      {
-        op_count += 7; // array access and compare
-        std::swap(array.at(current_index), array.at(subchild_right));
-        op_count += 2; // swap
-        current_index = subchild_right;
-        op_count++; // assignment
-      }
-      else
-      {
-        current_index++;
-        op_count++; // increment
-      }
+      op_count += 7; // array access and compare
+    if (array.at(current_index) < array.at(subchild_right)
+                && array.at(subchild_right) > array.at(subchild_left))
+    {
+      std::swap(array.at(current_index), array.at(subchild_right));
+      op_count += 2; // swap
+      current_index = subchild_right;
+      op_count++; //assignment
+    }
+    else
+    {
+      current_index++;
+      op_count++; //increment
+    }
       subchild_left = 2 * current_index + 1;
-      op_count += 3; // arithmetic and assignment
+      op_count += 3;  //arithmetic and assignment
       subchild_right = 2 * current_index + 2;
-      op_count += 3; // arithmetic and assignment
+      op_count += 3;  //arithmetic and assignment
     }
     op_count += 6; // while last time
   }
@@ -111,35 +115,14 @@ public:
    */
   unsigned pop()
   {
-
-    size_t max_position = array.size();
-    op_count += 2; // Array access and assignment
-    unsigned max_value = 0;
-    op_count++; // value assignment
-    for (size_t index = 0; index < array.size(); index++)
-    {
-     op_count += 2; //for loop header
-     op_count += 2; // array access and compare
-     if (array.at(index) > max_value)
-     {
-       max_value = array.at(index);
-       op_count += 2; // array access and assignment
-       max_position = index;
-       op_count++; // assignment;
-     }
-    }
-   op_count += 2; //for loop header last time
-
-    assert(max_position != array.size()); // no op_count for sanity check
-
-    for (size_t index = max_position; index < array.size() - 1; index++)
-    {
-      op_count += 2; // for loop header
-      array.at(index) = array.at(index + 1);
-      op_count += 4; // array access increment and assignment;
-    }
+    size_t initial_index = 0;
+   op_count++;  //assignment
+    unsigned max_value = array.at(initial_index);
+    op_count += 2; //array access and assignment
+    array.at(initial_index) = array.at(size() - 1);
+    op_count += 4;  //array access and assignment
     array.pop_back();
-    op_count++; // one operation for pop_back
+    op_count++; //one operation for pop_back
     percolate_down();
     return max_value;
   }
