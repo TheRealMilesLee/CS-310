@@ -49,21 +49,21 @@ private:
   void percolate_down()
   {
     size_t current_index = 0;
-   op_count++; //assignment
+    op_count++; //assignment
 
     size_t subchild_left = 2 * current_index + 1;
-   op_count += 3; //arithmetic and assignment
+    op_count += 3; //arithmetic and assignment
 
     size_t subchild_right = 2 * current_index + 2;
     op_count += 3;  //arithmetic and assignment
 
     while (current_index < size() - 1 && subchild_left < size()
-    && subchild_right < size())
+              && subchild_right < size())
     {
       op_count += 6; // while header
       op_count += 7; // array access and compare
-      if (array.at(current_index) < array.at(subchild_left) && array.at(subchild_left) >
-      array.at(subchild_right))
+      if (array.at(current_index) < array.at(subchild_left)
+      && array.at(subchild_left) > array.at(subchild_right))
       {
         std::swap(array.at(current_index), array.at(subchild_left));
         op_count += 2; // swap
@@ -71,19 +71,24 @@ private:
         op_count++; //assignment
       }
       op_count += 7; // array access and compare
-    if (array.at(current_index) < array.at(subchild_right)
-                && array.at(subchild_right) > array.at(subchild_left))
-    {
-      std::swap(array.at(current_index), array.at(subchild_right));
-      op_count += 2; // swap
-      current_index = subchild_right;
-      op_count++; //assignment
-    }
-    else
-    {
-      current_index++;
-      op_count++; //increment
-    }
+      if (array.at(current_index) < array.at(subchild_right)
+        && array.at(subchild_right) > array.at(subchild_left))
+      {
+        std::swap(array.at(current_index), array.at(subchild_right));
+        op_count += 2; // swap
+        current_index = subchild_right;
+        op_count++; //assignment
+      }
+      op_count += 17; //else situation
+      if (!(array.at(current_index) < array.at(subchild_left)
+        && array.at(subchild_left) > array.at(subchild_right))
+        &&!((array.at(current_index) < array.at(subchild_right)
+        && array.at(subchild_right) > array.at(subchild_left))))
+      {
+        current_index++;
+        op_count++; //increment
+      }
+
       subchild_left = 2 * current_index + 1;
       op_count += 3;  //arithmetic and assignment
       subchild_right = 2 * current_index + 2;
@@ -113,11 +118,11 @@ public:
    * Remove and return the maximum-priority job in the queue.
    * @return the priority of the removed job
    */
-  unsigned pop()
+  uint64_t pop()
   {
     size_t initial_index = 0;
    op_count++;  //assignment
-    unsigned max_value = array.at(initial_index);
+    uint64_t max_value = array.at(initial_index);
     op_count += 2; //array access and assignment
     array.at(initial_index) = array.at(size() - 1);
     op_count += 4;  //array access and assignment
@@ -153,7 +158,5 @@ public:
   {
     return op_count;
   }
-
-
 };
 #endif
