@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <string>
 using namespace std;
 
 /**
@@ -16,9 +17,12 @@ size_t hashx(const string& key, size_t table_size);
 int main()
 {
   string word;
+  size_t table_size = 235886;
   while (getline(cin, word))
   {
     // do something with the word
+    size_t hash_index = hashx(word, table_size);
+    cerr << "Hash index is: " << hash_index << endl;
   }
   return 0;
 }
