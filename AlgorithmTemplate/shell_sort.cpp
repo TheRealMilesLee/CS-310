@@ -5,16 +5,16 @@ void shellsort(vector<unsigned> &array)
 
   for (auto gap : gaps)
   {
-    for (size_t i = gap; i < n; i++)
+    for (size_t index = gap; index < n; index++)
     {
       unsigned temp = array.at(i);
-      size_t j = i;
-      while (j >= gap && temp < array.at(j - gap))
+      size_t jump = index;
+      while (jump >= gap && temp < array.at(jump - gap))
       {
-        array.at(j) = array.at(j - gap);
-        j -= gap;
+        array.at(jump) = array.at(jump - gap);
+        jump -= gap;
       }
-      array.at(j) = temp;
+      array.at(jump) = temp;
     }
   }
 }
