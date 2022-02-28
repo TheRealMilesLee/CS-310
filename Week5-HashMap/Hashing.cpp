@@ -22,7 +22,7 @@ int main()
   {
     // do something with the word
     size_t hash_index = hashx(word, table_size);
-    cerr << "Hash index is: " << hash_index << endl;
+    cerr <<  hash_index << endl;
   }
   return 0;
 }
