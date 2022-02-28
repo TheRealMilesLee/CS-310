@@ -24,8 +24,10 @@ int main()
     size_t hash_index = hashx(word, table_size);
     cerr <<  hash_index << endl;
   }
+  
   return 0;
 }
+
 
 size_t hashx(const string& key, size_t table_size)
 {
