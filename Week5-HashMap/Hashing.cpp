@@ -7,11 +7,12 @@
  * @date 2022-03-01
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved.
  */
+#include <algorithm>
+#include <chrono>
 #include <cstdint>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 /**
@@ -24,6 +25,7 @@ size_t hashx(const string& key, size_t table_size);
 
 int main()
 {
+  auto start = chrono::high_resolution_clock::now();
   string word;
   unsigned count = 0;
   size_t table_size = 102409;
@@ -46,6 +48,12 @@ int main()
     index++;
   }
   cout << count << endl;
+  auto stop = chrono::high_resolution_clock::now();
+  auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+  cout << "Time taken: "
+          << duration.count()
+          << " microseconds"
+          << endl;
   return 0;
 }
 
