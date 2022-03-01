@@ -24,7 +24,6 @@ int main()
     size_t hash_index = hashx(word, table_size);
     cerr <<  hash_index << endl;
   }
-  
   return 0;
 }
 
