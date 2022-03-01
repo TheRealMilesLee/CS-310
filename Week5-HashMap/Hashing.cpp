@@ -18,11 +18,13 @@ int main()
 {
   string word;
   size_t table_size = 235886;
+  vector<unsigned> collisions_count;
+  size_t index = 0;
   while (getline(cin, word))
   {
-    // do something with the word
+    // Get the hash table index for each words
     size_t hash_index = hashx(word, table_size);
-    cerr <<  hash_index << endl;
+    collisions_count.at(index).push_back(hash_index);
   }
   return 0;
 }
