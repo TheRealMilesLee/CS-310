@@ -36,12 +36,14 @@ int main()
   }
   // Sort the vector for easy search
   sort(all_word_index.begin(), all_word_index.end());
-  for (size_t index = 0; index < all_word_index.size() - 1; index++)
+  size_t index = 0;
+  while (index < all_word_index.size() - 1)
   {
     if (all_word_index.at(index) == all_word_index.at(index + 1))
     {
       count++;
     }
+    index++;
   }
   cout << count << endl;
   return 0;
