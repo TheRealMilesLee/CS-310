@@ -27,21 +27,20 @@ int main()
   string word;
   unsigned count = 0;
   size_t table_size = 102409;
-  vector<size_t> all_word_index;
+  vector<size_t> collision_index(table_size, 0);
   while (getline(cin, word))
   {
     // Get the hash table index for each words
     size_t hash_index = hashx(word, table_size);
-    all_word_index.push_back(hash_index);
+    collision_index.at(hash_index)++;
   }
   // Sort the vector for easy search
-  sort(all_word_index.begin(), all_word_index.end());
   size_t index = 0;
-  while (index < all_word_index.size() - 1)
+  while (index < collision_index.size())
   {
-    if (all_word_index.at(index) == all_word_index.at(index + 1))
+    if (collision_index.at(index) > 1)
     {
-      count++;
+      count += collision_index.at(index) - 1;
     }
     index++;
   }
