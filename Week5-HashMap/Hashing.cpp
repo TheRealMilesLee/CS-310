@@ -34,7 +34,6 @@ int main()
     size_t hash_index = hashx(word, table_size);
     collision_index.at(hash_index)++;
   }
-  // Sort the vector for easy search
   size_t index = 0;
   while (index < collision_index.size())
   {
