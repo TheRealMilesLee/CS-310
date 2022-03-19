@@ -4,10 +4,12 @@
 #include <iostream>
 
 /**
- * An AVL tree class
+ * @brief This is an AVL tree class
  * NOT guaranteeed to work with duplicate elements
  * @author Originally by Jon Beck
- * @author your name here
+ * @author Hengyi Li
+ * @copyright 2022, Hengyi Li, Jon Beck. All rights reserved. :)
+ * @version 0.0.1 Alpha 
  */
 template <typename Comparable>
 class AVLTree
@@ -20,7 +22,7 @@ class AVLTree
 
   /**
    * The copy constructor
-   * @param rhs the tree to be copied
+   * @param rhs is the right hand side of the tree to be copied
    */
   AVLTree(const AVLTree& rhs) : root(rhs.clone(rhs.root))
   { }
