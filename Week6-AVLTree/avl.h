@@ -212,7 +212,7 @@ class AVLTree
    */
   void print_tree(AVL_node* t, unsigned int depth) const
   {
-    const std::string LEVEL_SPACE = "     ";
+    const std::string LEVEL_SPACE = "-----";
     if (t != nullptr)
     {
       print_tree(t->right, depth + 1);
@@ -274,8 +274,13 @@ class AVLTree
 	 */
   void rotateLL(AVL_node*& p)
   {
-
-  }
+    AVL_node* orig_left = p->left;
+    p->left = orig_left->right;
+    orig_left->right = p;
+    p->height = std::max(height(p->left), height(p->right)) + 1;
+    orig_left->height = std::max(height(orig_left->left), p->height) + 1;
+    p = orig_left;
+	}
 
 	/**
 	 * This function is to perform the Left-Right rotation
@@ -283,8 +288,9 @@ class AVLTree
 	 */
   void rotateLR(AVL_node*& p)
   {
-
-  }
+		rotateLL(p);
+		rotateRR(p);
+	}
 
 	/**
 	 * This function is to perform the right-left rotation
@@ -292,7 +298,9 @@ class AVLTree
 	 */
   void rotateRL(AVL_node*& p)
   {
-  }
+		rotateRR(p);
+		rotateLL(p);
+	}
 };
 
 #endif
