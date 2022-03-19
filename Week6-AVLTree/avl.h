@@ -268,14 +268,28 @@ class AVLTree
     p = orig_right;
   }
 
+	/**
+	 * This function is to perfom the left-left rotation
+	 * @param p is the node on which to rotate
+	 */
   void rotateLL(AVL_node*& p)
   {
+
   }
 
+	/**
+	 * This function is to perform the Left-Right rotation
+	 * @param p is the node on which to roate
+	 */
   void rotateLR(AVL_node*& p)
   {
+
   }
 
+	/**
+	 * This function is to perform the right-left rotation
+	 * @param p is the node on which to rotate
+	 */
   void rotateRL(AVL_node*& p)
   {
   }
