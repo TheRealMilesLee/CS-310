@@ -212,13 +212,13 @@ class AVLTree
    */
   void print_tree(AVL_node* t, unsigned int depth) const
   {
-    const std::string LEVEL_SPACE = "-----";
+    const std::string LEVEL_SPACE = "     ";
     if (t != nullptr)
     {
       print_tree(t->right, depth + 1);
       for (unsigned i = 0; i < depth; i++)
       {
-        std::cout << "     ";
+        std::cout << "   ";
       }
       std::cout << LEVEL_SPACE << t->data << std::endl;
       print_tree(t->left, depth + 1);
