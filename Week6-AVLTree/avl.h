@@ -288,8 +288,8 @@ class AVLTree
 	 */
   void rotateLR(AVL_node*& p)
   {
-		rotateLL(p);
-		rotateRR(p);
+
+
 	}
 
 	/**
@@ -298,8 +298,7 @@ class AVLTree
 	 */
   void rotateRL(AVL_node*& p)
   {
-		rotateRR(p);
-		rotateLL(p);
+
 	}
 };
 
