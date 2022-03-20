@@ -288,8 +288,10 @@ class AVLTree
 	 */
   void rotateLR(AVL_node*& p)
   {
-
-
+		AVL_node* parent = p->left;
+		AVL_node* right_child = p->left->right;
+		rotateLL(right_child);
+		rotateRR(parent);
 	}
 
 	/**
