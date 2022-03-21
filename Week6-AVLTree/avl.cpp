@@ -35,12 +35,12 @@ int main(int argc, char **argv)
 //  {
 //    avl.insert(value);
 //  }
+	avl.insert(5);
+	avl.insert(6);
+	avl.insert(8);
 	avl.insert(3);
-	avl.insert(1);
 	avl.insert(2);
-//	avl.insert(4);
-//	avl.insert(5);
-//	avl.insert(6);
+	avl.insert(1);
 //	cerr << number_of_values << ' ' << avl.height() << endl;
   avl.print_tree();
   return 0;

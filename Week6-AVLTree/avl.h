@@ -31,7 +31,7 @@ private:
   AVL_node *root;
 
   /**
-   * Insert an element into a subtree
+   * @brief This function is to insert an element into a subtree
    * @param data is the item to insert.
    * @param root_node_subtree the root node of the subtree.
    */
@@ -52,10 +52,14 @@ private:
       {
         if (data < root_node_subtree->left->data)
         {
+          std::cout << "Rotate LL" << std::endl;
+          std::cout << root_node_subtree->data << std::endl;
           rotateLL(root_node_subtree);
         }
         else
         {
+          std::cout << "Rotate LR" << std::endl;
+          std::cout << root_node_subtree->data << std::endl;
           rotateLR(root_node_subtree);
         }
       }
@@ -70,10 +74,14 @@ private:
       {
         if (root_node_subtree->right->data < data)
         {
+          std::cout << "Rotate RR" << std::endl;
+          std::cout << root_node_subtree->data << std::endl;
           rotateRR(root_node_subtree);
         }
         else
         {
+          std::cout << "Rotate RL" << std::endl;
+          std::cout << root_node_subtree->data << std::endl;
           rotateRL(root_node_subtree);
         }
       }
@@ -108,105 +116,111 @@ private:
   }
 
   /**
-  * Accessor to report on the height of the subtree
-  * @param t the root of the subtree
-  * @return 0 = an empty tree, 1 = a one-node tree, 2 = a tree
-  * with two or three nodes, etc.
-  */
-  unsigned height(AVL_node *t) const { return t == nullptr ? 0 : t->height; }
-
-  /**
-  * Print a subtree, at level depth, sideways
-  * Uses spaces per level to indicate the depth "graphically"
-  * @param t the subtree to print
-  * @param depth the depth of this node
-  */
-  void print_tree(AVL_node *t, unsigned int depth) const
+   * @brief This function is to get the height of the subtree
+   * @param root_of_subtree is the root of the subtree
+   * @return 0 if the tree is empty
+   * @return 1 if the tree only have one node
+   * @return 2 if the tree has two or three nodes.
+   */
+  unsigned height(AVL_node *root_of_subtree) const
   {
-  const std::string LEVEL_SPACE = "     ";
-  if (t != nullptr)
-  {
-  print_tree(t->right, depth + 1);
-  for (unsigned i = 0; i < depth; i++)
-  {
-  std::cout << "   ";
-  }
-  std::cout << LEVEL_SPACE << t->data << std::endl;
-  print_tree(t->left, depth + 1);
-  }
+    return root_of_subtree == nullptr ? 0 : root_of_subtree->height;
   }
 
   /**
-  * Zero out and re-initialize a subtree
-  * @param t the root of the subtree
-  */
-  void make_empty(AVL_node *&t)
+   * @brief This function is to print a subtree, at level depth, sideways
+   * @param subtree is the subtree to print
+   * @param depth is the depth of the node
+   */
+  void print_tree(AVL_node *subtree, unsigned int depth) const
   {
-  if (t != nullptr)
-  {
-  make_empty(t->left);
-  make_empty(t->right);
-  delete t;
-  t = nullptr;
-  }
-  }
-
-  /**
-  * Make a deep copy of a subtree
-  * @param t the subtree to clone
-  * @return a pointer to the cloned subtree
-  */
-  AVL_node *clone(AVL_node *t) const
-  {
-  if (t == nullptr)
-  {
-  return nullptr;
-  }
-  return new AVL_node(t->data, clone(t->left), clone(t->right), t->height);
+    const std::string LEVEL_SPACE = "    ";
+    if (subtree != nullptr)
+    {
+      print_tree(subtree->right, depth + 1);
+      for (size_t index = 0; index < depth; index++)
+      {
+        std::cout << "   ";
+      }
+      std::cout << LEVEL_SPACE << subtree->data << std::endl;
+      print_tree(subtree->left, depth + 1);
+    }
   }
 
   /**
-  * Perform an RR rotation on a node
-  * @param p the node on which to rotate
-  */
-  void rotateRR(AVL_node *&p)
+   * @brief This function is to zero out and re-initialize the subtree
+   * @param root_subtree
+   */
+  void make_empty(AVL_node *&root_subtree)
   {
-  AVL_node *orig_right = p->right;
-  p->right = orig_right->left;
-  orig_right->left = p;
-  p->height = std::max(height(p->right), height(p->left)) + 1;
-  orig_right->height = std::max(height(orig_right->right), p->height) + 1;
-  p = orig_right;
+    if (root_subtree != nullptr)
+    {
+      make_empty(root_subtree->left);
+      make_empty(root_subtree->right);
+      delete root_subtree;
+      root_subtree = nullptr;
+    }
   }
 
   /**
-  * This function is to perform the left-left rotation
-  * @param p is the node on which to rotate
-  */
-  void rotateLL(AVL_node *&p)
+   * @brief This function is to make a deep copy of a subtree
+   * @param subtree_clone is the subtree to clone
+   * @return AVL_node* is a pointer to the cloned subtree
+   */
+  AVL_node *clone(AVL_node *subtree_clone) const
   {
-  AVL_node *orig_left = p->left;
-  p->left = orig_left->right;
-  orig_left->right = p;
-  p->height = std::max(height(p->left), height(p->right)) + 1;
-  orig_left->height = std::max(height(orig_left->left), p->height) + 1;
-  p = orig_left;
+    if (subtree_clone == nullptr)
+    {
+    return nullptr;
+    }
+    return new AVL_node(subtree_clone->data, clone(subtree_clone->left),
+                        clone(subtree_clone->right), subtree_clone->height);
   }
 
   /**
-  * This function is to perform the Left-Right rotation
-  * @param p is the node on which to rotate
-  */
-  void rotateLR(AVL_node *&p)
+   * @brief This function is to perform the RR rotation on a node
+   * @param rotate_node is the node on which to rotate
+   */
+  void rotateRR(AVL_node *&rotate_node)
   {
-  AVL_node *parent = p->left;
-  AVL_node *right_child = p->left->right;
-  rotateLL(right_child);
-  rotateRR(parent);
+    AVL_node *orig_right = rotate_node->right;
+    rotate_node->right = orig_right->left;
+    orig_right->left = rotate_node;
+    rotate_node->height
+      = std::max(height(rotate_node->right), height(rotate_node->left)) + 1;
+    orig_right->height
+      = std::max(height(orig_right->right), rotate_node->height) + 1;
+    rotate_node = orig_right;
   }
 
   /**
-  * This function is to perform the right-left rotation
+   * @brief This function is to perform the LL rotation
+   * @param rotate_node is the node on which to rotate
+   */
+  void rotateLL(AVL_node *&rotate_node)
+  {
+    AVL_node *orig_left = rotate_node->left;
+    rotate_node->left = orig_left->right;
+    orig_left->right = rotate_node;
+    rotate_node->height
+      = std::max(height(rotate_node->left), height(rotate_node->right)) + 1;
+    orig_left->height
+      = std::max(height(orig_left->left), rotate_node->height) + 1;
+    rotate_node = orig_left;
+  }
+
+/**
+ * @brief This function is to perform the LR operation
+ * @param rotate_node is the node on which to rotate
+ */
+  void rotateLR(AVL_node *&rotate_node)
+  {
+    AVL_node *left_sub_node = rotate_node->left;
+
+  }
+
+  /**
+  * @brief This function is to perform the right-left rotation
   * @param p is the node on which to rotate
   */
   void rotateRL(AVL_node *&p) {}
