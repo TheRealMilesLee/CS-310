@@ -45,7 +45,7 @@ private:
     // If insert data is less than the current node data.
     else if (data < root_node_subtree->data)
     {
-      // 
+      // Put the new data in the left side of the nodes.
       insert(data, root_node_subtree->left);
       if (height(root_node_subtree->left) -
               height(root_node_subtree->right) == 2)
