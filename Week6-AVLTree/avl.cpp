@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 //    avl.insert(value);
 //  }
 	avl.insert(3);
-	avl.insert(1);	
+	avl.insert(1);
 	avl.insert(2);
 //	avl.insert(4);
 //	avl.insert(5);
