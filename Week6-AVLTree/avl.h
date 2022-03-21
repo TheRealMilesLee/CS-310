@@ -47,8 +47,8 @@ private:
     {
       // Put the new data in the left side of the nodes.
       insert(data, root_node_subtree->left);
-      if (height(root_node_subtree->left) -
-              height(root_node_subtree->right) == 2)
+      // Keep the tree balance.
+      if (height(root_node_subtree->left) - height(root_node_subtree->right) == 2)
       {
         if (data < root_node_subtree->left->data)
         {
@@ -60,12 +60,13 @@ private:
         }
       }
     }
+    // If insert data is greater than the current node data.
     else if (root_node_subtree->data < data)
     {
+      // Put the new data in the right side of the nodes.
       insert(data, root_node_subtree->right);
-      if (height(root_node_subtree->right) -
-              height(root_node_subtree->left) ==
-          2)
+      // Keep the tree balance.
+      if (height(root_node_subtree->right) - height(root_node_subtree->left) == 2)
       {
         if (root_node_subtree->right->data < data)
         {
@@ -79,30 +80,31 @@ private:
     }
     // else duplicate; do nothing
     root_node_subtree->height = std::max(height(root_node_subtree->left),
-                                         height(root_node_subtree->right)) +
-                                1;
+                                         height(root_node_subtree->right)) + 1;
   }
+
   /**
-  * Does an element with this data occur in this subtree?
-  * @param data the key to search for
-  * @param t the root of the subtree to search
-  * @return whether or not the data is found
-  */
-  bool find(const Comparable &data, AVL_node *t) const
+   * @brief This function is to find the node is in the tree or node
+   * @param data is the key that we looking for
+   * @param search_node is the root of the subtree to search
+   * @return true if the data is found
+   * @return false if the data is not found.
+   */
+  bool find(const Comparable &data, AVL_node *search_node) const
   {
-  if (t == nullptr)
-  {
-  return false;
-  }
-  if (t->data == data)
-  {
-  return true;
-  }
-  if (t->data < data)
-  {
-  return find(data, t->right);
-  }
-  return find(data, t->left);
+    if (search_node == nullptr)
+    {
+      return false;
+    }
+    if (search_node->data == data)
+    {
+      return true;
+    }
+    if (search_node->data < data)
+    {
+      return find(data, search_node->right);
+    }
+    return find(data, search_node->left);
   }
 
   /**
