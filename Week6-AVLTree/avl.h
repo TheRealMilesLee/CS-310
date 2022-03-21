@@ -52,14 +52,10 @@ private:
       {
         if (data < root_node_subtree->left->data)
         {
-          std::cout << "Rotate LL" << std::endl;
-          std::cout << root_node_subtree->data << std::endl;
           rotateLL(root_node_subtree);
         }
         else
         {
-          std::cout << "Rotate LR" << std::endl;
-          std::cout << root_node_subtree->data << std::endl;
           rotateLR(root_node_subtree);
         }
       }
@@ -74,14 +70,10 @@ private:
       {
         if (root_node_subtree->right->data < data)
         {
-          std::cout << "Rotate RR" << std::endl;
-          std::cout << root_node_subtree->data << std::endl;
           rotateRR(root_node_subtree);
         }
         else
         {
-          std::cout << "Rotate RL" << std::endl;
-          std::cout << root_node_subtree->data << std::endl;
           rotateRL(root_node_subtree);
         }
       }
@@ -149,7 +141,7 @@ private:
 
   /**
    * @brief This function is to zero out and re-initialize the subtree
-   * @param root_subtree
+   * @param root_subtree is the root of the subtree
    */
   void make_empty(AVL_node *&root_subtree)
   {
@@ -216,14 +208,22 @@ private:
   void rotateLR(AVL_node *&rotate_node)
   {
     AVL_node *left_sub_node = rotate_node->left;
-
+    AVL_node *orig_node = rotate_node;
+    rotateRR(left_sub_node);
+    rotateLL(orig_node);
   }
 
   /**
-  * @brief This function is to perform the right-left rotation
-  * @param p is the node on which to rotate
-  */
-  void rotateRL(AVL_node *&p) {}
+   * @brief This function is to perform the LR operation
+   * @param rotate_node is the node on which to rotate
+   */
+  void rotateRL(AVL_node *&rotate_node)
+  {
+    AVL_node *right_sub_node = rotate_node->right;
+    AVL_node *orig_node = rotate_node;
+    rotateLL(right_sub_node);
+    rotateRR(orig_node);
+  }
 
 public:
   /**
