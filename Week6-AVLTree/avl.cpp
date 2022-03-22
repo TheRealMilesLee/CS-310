@@ -31,10 +31,11 @@ int main(int argc, char **argv)
 
   AVLTree<unsigned> avl;
 
- for (auto value : values)
- {
-   avl.insert(value);
- }
+  for (auto value : values)
+  {
+    avl.insert(value);
+  }
+
   cerr << number_of_values << ' ' << avl.height() << endl;
   avl.print_tree();
   return 0;

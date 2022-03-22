@@ -207,8 +207,8 @@ private:
  */
   void rotateLR(AVL_node *&rotate_node)
   {
-    AVL_node *left_sub_node = rotate_node;
-    rotateRR(left_sub_node->left);
+    AVL_node *copy_rotate_node = rotate_node;
+    rotateRR(copy_rotate_node->left);
     rotateLL(rotate_node);
   }
 
@@ -218,8 +218,8 @@ private:
    */
   void rotateRL(AVL_node *&rotate_node)
   {
-    AVL_node *right_sub_node = rotate_node;
-    rotateLL(right_sub_node->right);
+    AVL_node *copy_rotate_node = rotate_node;
+    rotateLL(copy_rotate_node->right);
     rotateRR(rotate_node);
   }
 
