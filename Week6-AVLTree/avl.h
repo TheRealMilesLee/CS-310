@@ -46,7 +46,7 @@ private:
     else if (data < root_node_subtree->data)
     {
       // Put the new data in the left side of the nodes.
-      insert(data, root_node_subtree->left);
+       insert(data, root_node_subtree->left);
       // Keep the tree balance.
       if (height(root_node_subtree->left) - height(root_node_subtree->right) == 2)
       {
