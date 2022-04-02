@@ -46,7 +46,7 @@ public:
   ~Matrix();
 
   /**
-   * Copy constructor to make 1-1 copy of existing matrix
+   * @brief Copy constructor to make 1-1 copy of existing matrix
    * @param m the existing matrix to be copied
    */
   Matrix(const Matrix<Object> &m); // Copy constructor
@@ -78,8 +78,6 @@ public:
    * @return the number of columns in the matrix
    */
   size_t numcols() const;
-
-
 };
 
 template <class Object>
