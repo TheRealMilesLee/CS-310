@@ -158,7 +158,7 @@ int opt(const string &first_string, size_t index_string_1,
         const string &second_string, size_t index_string_2,
         Matrix<int> &memo_table, int match, int mismatch, int gap)
 {
-  int result;
+  int result = 0;
   if (index_string_1 == 0 && index_string_2 == 0)
   {
     memo_table.at(index_string_1, index_string_2) = 0;
@@ -167,44 +167,18 @@ int opt(const string &first_string, size_t index_string_1,
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      if (first_string.at(index_string_1) == second_string.at(index_string_2))
-      {
-        result = opt(first_string, index_string_1, second_string,
-                     index_string_2 - 1, memo_table, match, mismatch, gap) +
-                 match;
-      }
-      else
-      {
-        result = opt(first_string, index_string_1, second_string,
-                     index_string_2 - 1, memo_table, match, mismatch, gap) +
-                 mismatch;
-      }
-      memo_table.at(index_string_1, index_string_2) = max(
-          result, opt(first_string, index_string_1, second_string,
-                      index_string_2 - 1, memo_table, match, mismatch, gap) +
-                      gap);
+      memo_table.at(index_string_1, index_string_2)
+        = opt(first_string, index_string_1, second_string, index_string_2 - 1,
+                memo_table, match, mismatch, gap) + gap;
     }
   }
   else if (index_string_1 != 0 && index_string_2 == 0)
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      if (first_string.at(index_string_1) == second_string.at(index_string_2))
-      {
-        result = opt(first_string, index_string_1 - 1, second_string,
-                     index_string_2, memo_table, match, mismatch, gap) +
-                 match;
-      }
-      else
-      {
-        result = opt(first_string, index_string_1 - 1, second_string,
-                     index_string_2, memo_table, match, mismatch, gap) +
-                 mismatch;
-      }
-      memo_table.at(index_string_1, index_string_2) =
-          max(result, opt(first_string, index_string_1 - 1, second_string,
-                          index_string_2, memo_table, match, mismatch, gap) +
-                          gap);
+      memo_table.at(index_string_1, index_string_2)
+        = opt(first_string, index_string_1 - 1, second_string, index_string_2,
+              memo_table, match, mismatch, gap) + gap;
     }
   }
   else
