@@ -152,6 +152,8 @@ void traceback(const Matrix<int> &memo, const string &first_string,
                const string &second_string, int gap)
 {
   cout << endl << " The aligned strings: " << endl;
+  cout << first_string << endl;
+  cout << second_string << "-" << endl;
 }
 
 int opt(const string &first_string, size_t index_string_1,
