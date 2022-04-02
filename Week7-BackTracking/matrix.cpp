@@ -27,14 +27,15 @@ int opt(const string &first_string, size_t index_string_1,
         Matrix<int> &memo_table, int match, int mismatch, int gap);
 
 /**
- * find and print the optimal alignment of the two strings
- * @param memo the memo table
- * @param s the first string
- * @param t the second string
- * @param gap the gap penalty
+ * @brief This is the traceback to find and print the optimal alignment of
+ * the two strings
+ * @param memo is the memo table
+ * @param first_string is the first string
+ * @param second_string is the second string
+ * @param gap is the gap penalty
  */
-void traceback(const Matrix<int> &memo, const string &s, const string &t,
-               int gap);
+void traceback(const Matrix<int> &memo, const string &first_string,
+               const string &second_string, int gap);
 
 /**
  * dump the memo table to standard output
@@ -139,20 +140,9 @@ void traceback(const Matrix<int> &memo, const string &s, const string &t,
 {
 }
 
-int opt(const string &s, size_t i, const string &t, size_t j,
-        Matrix<int> &memo, int match, int mismatch, int gap)
+int opt(const string &first_string, size_t index_string_1,
+        const string &second_string, size_t index_string_2,
+        Matrix<int> &memo_table, int match, int mismatch, int gap)
 {
-  if (memo.at(i, j) == )
-  {
-    if (s.at(i) == t.at(j))
-    {
-      value1 = opt(s, t, i - 1, j - 1) + MR;
-    }
-    else
-    {
-      value1 = opt(s, t, i - 1, j - 1) + MP;
-    }
-    memo.at(i, j) = max(value1, opt(s, t, i, j - 1) + GP, opt(s, t, i - 1, j) + GP);
-  }
-  return memo.at(i, j);
+
 }
