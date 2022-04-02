@@ -3,10 +3,10 @@
  * @author your name here
  * @version the date here
  */
+#include "matrix.h"
 #include <climits>
 #include <iomanip>
 #include <iostream>
-#include "matrix.h"
 using namespace std;
 
 /**
@@ -19,9 +19,8 @@ using namespace std;
  * @param memo the memo table
  * @return the optimal alignment score of the two strings
  */
-int opt(const string& s, size_t i, const string& t, size_t j,
-        Matrix<int>& memo, int match, int mismatch, int gap);
-
+int opt(const string &s, size_t i, const string &t, size_t j,
+        Matrix<int> &memo, int match, int mismatch, int gap);
 
 /**
  * find and print the optimal alignment of the two strings
@@ -30,7 +29,7 @@ int opt(const string& s, size_t i, const string& t, size_t j,
  * @param t the second string
  * @param gap the gap penalty
  */
-void traceback(const Matrix<int>& memo, const string& s, const string& t,
+void traceback(const Matrix<int> &memo, const string &s, const string &t,
                int gap);
 
 /**
@@ -39,10 +38,9 @@ void traceback(const Matrix<int>& memo, const string& s, const string& t,
  * @param s the first string
  * @param t the second string
  */
-void print_memo(const Matrix<int>& memo, const string& s, const string& t);
+void print_memo(const Matrix<int> &memo, const string &s, const string &t);
 
-
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   if (argc != 6)
   {
@@ -74,10 +72,10 @@ int main(int argc, char** argv)
   }
 
   int score =
-    opt(s, s.size() - 1, t, t.size() - 1, memo, match, mismatch, gap);
+      opt(s, s.size() - 1, t, t.size() - 1, memo, match, mismatch, gap);
 
-  cout << "The optimal alignment score between " << s << " and " << t <<
-    " is " << score << endl;
+  cout << "The optimal alignment score between " << s << " and " << t
+       << " is " << score << endl;
 
   cout << endl << "The completed memo table: " << endl << endl;
 
@@ -87,7 +85,7 @@ int main(int argc, char** argv)
   return 0;
 }
 
-void print_memo(const Matrix<int>& memo, const string& s, const string& t)
+void print_memo(const Matrix<int> &memo, const string &s, const string &t)
 {
   int field_width = 6;
   int left_label_width = 6;
