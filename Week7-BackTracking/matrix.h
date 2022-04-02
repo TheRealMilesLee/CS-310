@@ -9,6 +9,7 @@
  * @author Jon Beck
  * @version 22 October 2019
  */
+
 template <class Object> class Matrix
 {
 private:

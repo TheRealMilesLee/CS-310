@@ -10,17 +10,21 @@
 using namespace std;
 
 /**
- * the recursive, memoized optimum function for computing the edit distance
- * between two strings
- * @param s the first string
- * @param i the index of the first string
- * @param t the second string
- * @param j the index of the second string
- * @param memo the memo table
- * @return the optimal alignment score of the two strings
+ * @brief This is the recursive, memoized optimum function for computing the
+ * edit distance between two strings
+ * @param first_string is the first string
+ * @param index_string_1 is the index of the first string
+ * @param second_string is the second string
+ * @param index_string_2 is the index of the second string
+ * @param memo_table is the memo table
+ * @param match is the match reward
+ * @param mismatch is the mismatch penalty
+ * @param gap is the gap penalty
+ * @return int is the optimal alignment score of the two strings
  */
-int opt(const string &s, size_t i, const string &t, size_t j,
-        Matrix<int> &memo, int match, int mismatch, int gap);
+int opt(const string &first_string, size_t index_string_1,
+        const string &second_string, size_t index_string_2,
+        Matrix<int> &memo_table, int match, int mismatch, int gap);
 
 /**
  * find and print the optimal alignment of the two strings
@@ -128,4 +132,27 @@ void print_memo(const Matrix<int> &memo, const string &s, const string &t)
     }
     cout << endl;
   }
+}
+
+void traceback(const Matrix<int> &memo, const string &s, const string &t,
+               int gap)
+{
+}
+
+int opt(const string &s, size_t i, const string &t, size_t j,
+        Matrix<int> &memo, int match, int mismatch, int gap)
+{
+  if (memo.at(i, j) == )
+  {
+    if (s.at(i) == t.at(j))
+    {
+      value1 = opt(s, t, i - 1, j - 1) + MR;
+    }
+    else
+    {
+      value1 = opt(s, t, i - 1, j - 1) + MP;
+    }
+    memo.at(i, j) = max(value1, opt(s, t, i, j - 1) + GP, opt(s, t, i - 1, j) + GP);
+  }
+  return memo.at(i, j);
 }
