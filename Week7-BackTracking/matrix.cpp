@@ -98,7 +98,7 @@ int main(int argc, char **argv)
   print_memo(memo, first_string, second_string);
 
   // DIsplay how two strings are aligned
-  // traceback(memo, first_string, second_string, gap);
+  traceback(memo, first_string, second_string, gap);
   return 0;
 }
 
@@ -151,6 +151,7 @@ void print_memo(const Matrix<int> &memo, const string &first_string,
 void traceback(const Matrix<int> &memo, const string &first_string,
                const string &second_string, int gap)
 {
+  cout << endl << " The aligned strings: " << endl;
 }
 
 int opt(const string &first_string, size_t index_string_1,
