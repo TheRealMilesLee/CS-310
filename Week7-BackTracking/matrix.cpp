@@ -135,9 +135,10 @@ void print_memo(const Matrix<int> &memo, const string &s, const string &t)
   }
 }
 
-void traceback(const Matrix<int> &memo, const string &s, const string &t,
-               int gap)
+void traceback(const Matrix<int> &memo, const string &first_string,
+               const string &second_string, int gap)
 {
+
 }
 
 int opt(const string &first_string, size_t index_string_1,
