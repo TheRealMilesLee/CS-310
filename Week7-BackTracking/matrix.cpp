@@ -1,7 +1,10 @@
 /**
- * calculate the optimum alignment between two strings
- * @author your name here
- * @version the date here
+ * @file matrix.cpp
+ * @author Hengyi Li
+ * @brief This file is to calculate the optimum alignment between two strings
+ * @version 0.1
+ * @date 2022-04-03
+ * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved
  */
 #include "matrix.h"
 #include <climits>
@@ -90,7 +93,7 @@ int main(int argc, char **argv)
                   second_string.size() - 1, memo, match, mismatch, gap);
 
   cout << "The optimal alignment score between" << first_string << " and"
-          << second_string << " is " << score << endl;
+       << second_string << " is " << score << endl;
 
   cout << endl << "The completed memo table: " << endl << endl;
 
@@ -172,14 +175,15 @@ void traceback(const Matrix<int> &memo, const string &first_string,
       align_string_2.insert(0, 1, first_string.at(current_row));
       current_row--;
     }
-    if (memo.at(current_row-1, current_column) == memo.at(current_row, current_column) - gap)
+    if (memo.at(current_row - 1, current_column) ==
+        memo.at(current_row, current_column) - gap)
     {
       align_string_1.insert(0, "-");
       align_string_2.insert(0, 1, first_string.at(current_row));
       current_row--;
     }
-    else if ( memo.at(current_row, current_column - 1) ==
-                  memo.at(current_row, current_column) - gap)
+    else if (memo.at(current_row, current_column - 1) ==
+             memo.at(current_row, current_column) - gap)
     {
       align_string_1.insert(0, 1, second_string.at(current_column));
       align_string_2.insert(0, "-");
@@ -210,18 +214,20 @@ int opt(const string &first_string, size_t index_string_1,
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      memo_table.at(index_string_1, index_string_2)
-        = opt(first_string, index_string_1, second_string, index_string_2 - 1,
-                memo_table, match, mismatch, gap) + gap;
+      memo_table.at(index_string_1, index_string_2) =
+          opt(first_string, index_string_1, second_string, index_string_2 - 1,
+              memo_table, match, mismatch, gap) +
+          gap;
     }
   }
   else if (index_string_1 != 0 && index_string_2 == 0)
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      memo_table.at(index_string_1, index_string_2)
-        = opt(first_string, index_string_1 - 1, second_string, index_string_2,
-              memo_table, match, mismatch, gap) + gap;
+      memo_table.at(index_string_1, index_string_2) =
+          opt(first_string, index_string_1 - 1, second_string, index_string_2,
+              memo_table, match, mismatch, gap) +
+          gap;
     }
   }
   else
@@ -232,7 +238,8 @@ int opt(const string &first_string, size_t index_string_1,
       if (first_string.at(index_string_1) == second_string.at(index_string_2))
       {
         result = opt(first_string, index_string_1 - 1, second_string,
-          index_string_2 - 1, memo_table, match, mismatch, gap) + match;
+                     index_string_2 - 1, memo_table, match, mismatch, gap) +
+                 match;
       }
       else
       {
