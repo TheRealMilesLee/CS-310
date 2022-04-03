@@ -151,9 +151,40 @@ void print_memo(const Matrix<int> &memo, const string &first_string,
 void traceback(const Matrix<int> &memo, const string &first_string,
                const string &second_string, int gap)
 {
-  cout << endl << " The aligned strings: " << endl;
-  cout << first_string << endl;
-  cout << second_string << "-" << endl;
+  cout << endl << "The aligned strings: " << endl;
+  size_t current_row = memo.numrows() - 2;
+  size_t current_column = memo.numcols() - 2;
+  size_t init_row = 0;
+  size_t init_col = 0;
+
+  string align_string_1 = "";
+  string align_string_2 = "";
+  while (current_row > init_row && current_column > init_col)
+  {
+    if (memo.at(current_row-1, current_column) == memo.at(current_row, current_column) - gap)
+    {
+      align_string_1.insert(0, "-");
+      align_string_2.insert(0, 1, first_string.at(current_row));
+      current_row--;
+    }
+    else if ( memo.at(current_row, current_column - 1) ==
+                  memo.at(current_row, current_column) - gap)
+    {
+      align_string_1.insert(0, 1, second_string.at(current_column));
+      align_string_2.insert(0, "-");
+      current_column--;
+    }
+    else
+    {
+      align_string_1.insert(0, 1, second_string.at(current_column));
+      align_string_2.insert(0, 1, first_string.at(current_row));
+      current_row--;
+      current_column--;
+    }
+    cout << current_row << "  :  " << current_column << endl;
+  }
+  cout << align_string_1 << endl;
+  cout << align_string_2 << endl;
 }
 
 int opt(const string &first_string, size_t index_string_1,
