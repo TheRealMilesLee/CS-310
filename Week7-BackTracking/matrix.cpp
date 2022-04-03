@@ -89,7 +89,7 @@ int main(int argc, char **argv)
   int score = opt(first_string, first_string.size() - 1, second_string,
                   second_string.size() - 1, memo, match, mismatch, gap);
 
-  cout << "The optimal alignment score between " << first_string << " and "
+  cout << "The optimal alignment score between" << first_string << " and"
           << second_string << " is " << score << endl;
 
   cout << endl << "The completed memo table: " << endl << endl;
