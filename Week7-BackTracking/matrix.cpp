@@ -162,20 +162,22 @@ void traceback(const Matrix<int> &memo, const string &first_string,
 
   string align_string_1 = "";
   string align_string_2 = "";
-  while (current_row > init_row && current_column > init_col)
+  cout << current_row << ":" << current_column << endl;
+  while (current_row > init_row || current_column > init_col)
   {
-    if (current_row < 2 && current_column >= 2)
+    if (current_row == 0 && current_column != 0)
     {
       align_string_1.insert(0, 1, second_string.at(current_column));
+      align_string_2.insert(0, "-");
       current_column--;
     }
-    if (current_column < 2 && current_row >= 2)
+    else if (current_column == 0 && current_row != 0)
     {
-      align_string_1.insert(0, 1, second_string.at(current_column));
+      align_string_1.insert(0, "-");
       align_string_2.insert(0, 1, first_string.at(current_row));
       current_row--;
     }
-    if (memo.at(current_row - 1, current_column) ==
+    else if (memo.at(current_row - 1, current_column) ==
         memo.at(current_row, current_column) - gap)
     {
       align_string_1.insert(0, "-");
@@ -196,6 +198,7 @@ void traceback(const Matrix<int> &memo, const string &first_string,
       current_row--;
       current_column--;
     }
+    cout << current_row << ":" << current_column << endl;
   }
   cout << align_string_1 << endl;
   cout << align_string_2 << endl;
