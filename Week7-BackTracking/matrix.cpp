@@ -1,7 +1,7 @@
 /**
  * @file matrix.cpp
  * @author Hengyi Li
- * @brief This file is to calculate the optimum alignment between two strings
+ * @brief This file is to calculate the optimum alignment between two string
  * @version 0.1
  * @date 2022-04-06
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved
@@ -13,8 +13,8 @@
 using namespace std;
 
 /**
- * @brief This is the recursive, memoized optimum function for computing the
- * edit distance between two strings
+ * @brief This is the recursive, memoized optimum function for computing
+ * the edit distance between two strings
  * @param first_string is the first string
  * @param index_string_1 is the index of the first string
  * @param second_string is the second string
@@ -163,6 +163,7 @@ void traceback(const Matrix<int> &memo, const string &first_string,
   string align_string_2 = "";
   while (current_row > init_row || current_column > init_col)
   {
+    // Handle boundary condition
     if (current_row == 0 && current_column != 0)
     {
       align_string_1.insert(0, 1, second_string.at(current_column));
@@ -175,26 +176,30 @@ void traceback(const Matrix<int> &memo, const string &first_string,
       align_string_2.insert(0, 1, first_string.at(current_row));
       current_row--;
     }
-    else if (memo.at(current_row - 1, current_column) ==
-        memo.at(current_row, current_column) - gap)
-    {
-      align_string_1.insert(0, "-");
-      align_string_2.insert(0, 1, first_string.at(current_row));
-      current_row--;
-    }
-    else if (memo.at(current_row, current_column - 1) ==
-             memo.at(current_row, current_column) - gap)
-    {
-      align_string_1.insert(0, 1, second_string.at(current_column));
-      align_string_2.insert(0, "-");
-      current_column--;
-    }
     else
     {
-      align_string_1.insert(0, 1, second_string.at(current_column));
-      align_string_2.insert(0, 1, first_string.at(current_row));
-      current_row--;
-      current_column--;
+      // Not at boundary condition
+      if (memo.at(current_row - 1, current_column) ==
+          memo.at(current_row, current_column) - gap)
+      {
+        align_string_1.insert(0, "-");
+        align_string_2.insert(0, 1, first_string.at(current_row));
+        current_row--;
+      }
+      else if (memo.at(current_row, current_column - 1) ==
+               memo.at(current_row, current_column) - gap)
+      {
+        align_string_1.insert(0, 1, second_string.at(current_column));
+        align_string_2.insert(0, "-");
+        current_column--;
+      }
+      else
+      {
+        align_string_1.insert(0, 1, second_string.at(current_column));
+        align_string_2.insert(0, 1, first_string.at(current_row));
+        current_row--;
+        current_column--;
+      }
     }
   }
   cout << align_string_1 << endl;
@@ -214,20 +219,18 @@ int opt(const string &first_string, size_t index_string_1,
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      memo_table.at(index_string_1, index_string_2) =
-          opt(first_string, index_string_1, second_string, index_string_2 - 1,
-              memo_table, match, mismatch, gap) +
-          gap;
+      memo_table.at(index_string_1, index_string_2)
+        = opt(first_string, index_string_1, second_string,
+                index_string_2 - 1, memo_table, match, mismatch, gap) + gap;
     }
   }
   else if (index_string_1 != 0 && index_string_2 == 0)
   {
     if (memo_table.at(index_string_1, index_string_2) == INT_MAX)
     {
-      memo_table.at(index_string_1, index_string_2) =
-          opt(first_string, index_string_1 - 1, second_string, index_string_2,
-              memo_table, match, mismatch, gap) +
-          gap;
+      memo_table.at(index_string_1, index_string_2)
+        = opt(first_string, index_string_1 - 1, second_string,
+                index_string_2, memo_table, match, mismatch, gap) + gap;
     }
   }
   else
@@ -237,24 +240,22 @@ int opt(const string &first_string, size_t index_string_1,
     {
       if (first_string.at(index_string_1) == second_string.at(index_string_2))
       {
-        result = opt(first_string, index_string_1 - 1, second_string,
-                     index_string_2 - 1, memo_table, match, mismatch, gap) +
-                 match;
+        result
+          = opt(first_string, index_string_1 - 1, second_string,
+              index_string_2 - 1, memo_table, match, mismatch, gap) + match;
       }
       else
       {
-        result = opt(first_string, index_string_1 - 1, second_string,
-                     index_string_2 - 1, memo_table, match, mismatch, gap) +
-                 mismatch;
+        result
+          = opt(first_string, index_string_1 - 1, second_string,
+          index_string_2 - 1, memo_table, match, mismatch, gap) + mismatch;
       }
       memo_table.at(index_string_1, index_string_2) =
           max(result,
               max(opt(first_string, index_string_1, second_string,
-                      index_string_2 - 1, memo_table, match, mismatch, gap) +
-                      gap,
+                index_string_2 - 1, memo_table, match, mismatch, gap) + gap,
                   opt(first_string, index_string_1 - 1, second_string,
-                      index_string_2, memo_table, match, mismatch, gap) +
-                      gap));
+                index_string_2, memo_table, match, mismatch, gap) + gap));
     }
   }
   return memo_table.at(index_string_1, index_string_2);
