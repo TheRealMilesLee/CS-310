@@ -3,7 +3,7 @@
  * @author Hengyi Li
  * @brief This file is to calculate the optimum alignment between two strings
  * @version 0.1
- * @date 2022-04-03
+ * @date 2022-04-06
  * @copyright Copyright (c) 2022. Hengyi Li, All rights reserved
  */
 #include "matrix.h"
@@ -159,10 +159,8 @@ void traceback(const Matrix<int> &memo, const string &first_string,
   size_t current_column = memo.numcols() - 2;
   size_t init_row = 0;
   size_t init_col = 0;
-
   string align_string_1 = "";
   string align_string_2 = "";
-  cout << current_row << ":" << current_column << endl;
   while (current_row > init_row || current_column > init_col)
   {
     if (current_row == 0 && current_column != 0)
@@ -198,7 +196,6 @@ void traceback(const Matrix<int> &memo, const string &first_string,
       current_row--;
       current_column--;
     }
-    cout << current_row << ":" << current_column << endl;
   }
   cout << align_string_1 << endl;
   cout << align_string_2 << endl;
