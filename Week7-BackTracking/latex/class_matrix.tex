@@ -1,0 +1,174 @@
+\hypertarget{class_matrix}{}\doxysection{Matrix\texorpdfstring{$<$}{<} Object \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_matrix}\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+
+
+{\ttfamily \#include $<$matrix.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}{Matrix}} (size\+\_\+t rows, size\+\_\+t cols)
+\begin{DoxyCompactList}\small\item\em Constructor, specifying number of both row and columns. \end{DoxyCompactList}\item 
+Object \& \mbox{\hyperlink{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}{at}} (size\+\_\+t row, size\+\_\+t col)
+\begin{DoxyCompactList}\small\item\em Access to an element to allow modification. \end{DoxyCompactList}\item 
+const Object \& \mbox{\hyperlink{class_matrix_a4d10d416fe451aab0fa8003d34a0badf}{at}} (size\+\_\+t row, size\+\_\+t col) const
+\begin{DoxyCompactList}\small\item\em Constant access to an element. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_matrix_af522ba0e72c113405e81e0314d7768e8}\label{class_matrix_af522ba0e72c113405e81e0314d7768e8}} 
+{\bfseries $\sim$\+Matrix} ()
+\begin{DoxyCompactList}\small\item\em Destructor to free allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix_acdf5c50a9cbbcdbabe3f73a863c2d0de}{Matrix}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&m)
+\begin{DoxyCompactList}\small\item\em Copy constructor to make 1-\/1 copy of existing matrix. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_matrix_a9153c0cb9e3221a05fe94097ea60ab7a}\label{class_matrix_a9153c0cb9e3221a05fe94097ea60ab7a}} 
+{\bfseries Matrix} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&\&m)=delete
+\begin{DoxyCompactList}\small\item\em Disallow the rvalue copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& \mbox{\hyperlink{class_matrix_aa55e06307264cfd92cb3a3cf0aa31744}{operator=}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&m)
+\begin{DoxyCompactList}\small\item\em Assignment operator to make 1-\/1 copy of existing matrix. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_matrix_adbbc1f87b9afa1af9e6a2fd670eaadc3}\label{class_matrix_adbbc1f87b9afa1af9e6a2fd670eaadc3}} 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&\&m)=delete
+\begin{DoxyCompactList}\small\item\em Disallow the rvalue assignment operator. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_matrix_a3260bf098ed354b19579f0b5cbd9eef4}{numrows}} () const
+\begin{DoxyCompactList}\small\item\em Accessor to determine how many rows are in the matrix. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_matrix_a3432f6d043667624b60eea2f7895d970}{numcols}} () const
+\begin{DoxyCompactList}\small\item\em Accessor to determine how many columns are in the matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Object$>$\newline
+class Matrix$<$ Object $>$}
+A generic 2-\/dimensional array class \begin{DoxyAuthor}{Author}
+Jon Beck 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+22 October 2019 
+\end{DoxyVersion}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}\label{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\mbox{\hyperlink{class_matrix}{\+::\+Matrix}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{rows,  }\item[{size\+\_\+t}]{cols }\end{DoxyParamCaption})}
+
+
+
+Constructor, specifying number of both row and columns. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rows} & the number of rows \\
+\hline
+{\em cols} & the number of columns \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_matrix_acdf5c50a9cbbcdbabe3f73a863c2d0de}\label{class_matrix_acdf5c50a9cbbcdbabe3f73a863c2d0de}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\mbox{\hyperlink{class_matrix}{\+::\+Matrix}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Copy constructor to make 1-\/1 copy of existing matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & the existing matrix to be copied \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}\label{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!at@{at}}
+\index{at@{at}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+Object \& \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\+::at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{row,  }\item[{size\+\_\+t}]{col }\end{DoxyParamCaption})}
+
+
+
+Access to an element to allow modification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the row index \\
+\hline
+{\em col} & the column index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+reference to the element at that position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_a4d10d416fe451aab0fa8003d34a0badf}\label{class_matrix_a4d10d416fe451aab0fa8003d34a0badf}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!at@{at}}
+\index{at@{at}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+const Object \& \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\+::at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{row,  }\item[{size\+\_\+t}]{col }\end{DoxyParamCaption}) const}
+
+
+
+Constant access to an element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the row index \\
+\hline
+{\em col} & the column index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+constant reference to the element at that position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_a3432f6d043667624b60eea2f7895d970}\label{class_matrix_a3432f6d043667624b60eea2f7895d970}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!numcols@{numcols}}
+\index{numcols@{numcols}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{numcols()}{numcols()}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+size\+\_\+t \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\+::numcols}
+
+
+
+Accessor to determine how many columns are in the matrix. 
+
+\begin{DoxyReturn}{Returns}
+the number of columns in the matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_a3260bf098ed354b19579f0b5cbd9eef4}\label{class_matrix_a3260bf098ed354b19579f0b5cbd9eef4}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!numrows@{numrows}}
+\index{numrows@{numrows}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{numrows()}{numrows()}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+size\+\_\+t \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\+::numrows}
+
+
+
+Accessor to determine how many rows are in the matrix. 
+
+\begin{DoxyReturn}{Returns}
+the number of rows in the matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_matrix_aa55e06307264cfd92cb3a3cf0aa31744}\label{class_matrix_aa55e06307264cfd92cb3a3cf0aa31744}} 
+\index{Matrix$<$ Object $>$@{Matrix$<$ Object $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Matrix$<$ Object $>$@{Matrix$<$ Object $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class Object $>$ \\
+\mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \& \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ Object $>$ \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Assignment operator to make 1-\/1 copy of existing matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & the existing matrix to be copied \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+matrix.\+h\end{DoxyCompactItemize}

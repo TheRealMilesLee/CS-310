@@ -1,0 +1,115 @@
+\hypertarget{matrix_8cpp}{}\doxysection{matrix.\+cpp File Reference}
+\label{matrix_8cpp}\index{matrix.cpp@{matrix.cpp}}
+
+
+This file is to calculate the optimum alignment between two string.  
+
+
+{\ttfamily \#include \char`\"{}matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{matrix_8cpp_af66476ef9ff30f4f3c06a4b95bcbca25}{opt}} (const string \&first\+\_\+string, size\+\_\+t index\+\_\+string\+\_\+1, const string \&second\+\_\+string, size\+\_\+t index\+\_\+string\+\_\+2, \mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&memo\+\_\+table, int match, int mismatch, int gap)
+\begin{DoxyCompactList}\small\item\em This is the recursive, memoized optimum function for computing the edit distance between two strings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{matrix_8cpp_a0dcde31537494ae331156db27955e919}{traceback}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&memo, const string \&first\+\_\+string, const string \&second\+\_\+string, int gap)
+\begin{DoxyCompactList}\small\item\em This is the traceback to find and print the optimal alignment of the two strings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{matrix_8cpp_a7a55c9b16e213d12d69b61730c1138ff}{print\+\_\+memo}} (const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&memo, const string \&first\+\_\+string, const string \&second\+\_\+string)
+\begin{DoxyCompactList}\small\item\em This function is to dump the memo table to standard output. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{matrix_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{matrix_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file is to calculate the optimum alignment between two string. 
+
+\begin{DoxyAuthor}{Author}
+Hengyi Li 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/06 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022. Hengyi Li, All rights reserved 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{matrix_8cpp_af66476ef9ff30f4f3c06a4b95bcbca25}\label{matrix_8cpp_af66476ef9ff30f4f3c06a4b95bcbca25}} 
+\index{matrix.cpp@{matrix.cpp}!opt@{opt}}
+\index{opt@{opt}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{opt()}{opt()}}
+{\footnotesize\ttfamily int opt (\begin{DoxyParamCaption}\item[{const string \&}]{first\+\_\+string,  }\item[{size\+\_\+t}]{index\+\_\+string\+\_\+1,  }\item[{const string \&}]{second\+\_\+string,  }\item[{size\+\_\+t}]{index\+\_\+string\+\_\+2,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&}]{memo\+\_\+table,  }\item[{int}]{match,  }\item[{int}]{mismatch,  }\item[{int}]{gap }\end{DoxyParamCaption})}
+
+
+
+This is the recursive, memoized optimum function for computing the edit distance between two strings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first\+\_\+string} & is the first string \\
+\hline
+{\em index\+\_\+string\+\_\+1} & is the index of the first string \\
+\hline
+{\em second\+\_\+string} & is the second string \\
+\hline
+{\em index\+\_\+string\+\_\+2} & is the index of the second string \\
+\hline
+{\em memo\+\_\+table} & is the memo table \\
+\hline
+{\em match} & is the match reward \\
+\hline
+{\em mismatch} & is the mismatch penalty \\
+\hline
+{\em gap} & is the gap penalty \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int is the optimal alignment score of the two strings 
+\end{DoxyReturn}
+\mbox{\Hypertarget{matrix_8cpp_a7a55c9b16e213d12d69b61730c1138ff}\label{matrix_8cpp_a7a55c9b16e213d12d69b61730c1138ff}} 
+\index{matrix.cpp@{matrix.cpp}!print\_memo@{print\_memo}}
+\index{print\_memo@{print\_memo}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{print\_memo()}{print\_memo()}}
+{\footnotesize\ttfamily void print\+\_\+memo (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&}]{memo,  }\item[{const string \&}]{first\+\_\+string,  }\item[{const string \&}]{second\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+This function is to dump the memo table to standard output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em memo} & the memo table \\
+\hline
+{\em first\+\_\+string} & the first string \\
+\hline
+{\em second\+\_\+string} & the second string \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8cpp_a0dcde31537494ae331156db27955e919}\label{matrix_8cpp_a0dcde31537494ae331156db27955e919}} 
+\index{matrix.cpp@{matrix.cpp}!traceback@{traceback}}
+\index{traceback@{traceback}!matrix.cpp@{matrix.cpp}}
+\doxysubsubsection{\texorpdfstring{traceback()}{traceback()}}
+{\footnotesize\ttfamily void traceback (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}}$<$ int $>$ \&}]{memo,  }\item[{const string \&}]{first\+\_\+string,  }\item[{const string \&}]{second\+\_\+string,  }\item[{int}]{gap }\end{DoxyParamCaption})}
+
+
+
+This is the traceback to find and print the optimal alignment of the two strings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em memo} & is the memo table \\
+\hline
+{\em first\+\_\+string} & is the first string \\
+\hline
+{\em second\+\_\+string} & is the second string \\
+\hline
+{\em gap} & is the gap penalty \\
+\hline
+\end{DoxyParams}

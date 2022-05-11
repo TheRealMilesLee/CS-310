@@ -1,0 +1,90 @@
+\hypertarget{matrix_8h_source}{}\doxysection{matrix.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MATRIX\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MATRIX\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{13 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object> \textcolor{keyword}{class }\mbox{\hyperlink{class_matrix}{Matrix}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{private}:}
+\DoxyCodeLine{16   \textcolor{keywordtype}{size\_t} rows;}
+\DoxyCodeLine{17   \textcolor{keywordtype}{size\_t} cols;}
+\DoxyCodeLine{18   Object *data;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26   \mbox{\hyperlink{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}{Matrix}}(\textcolor{keywordtype}{size\_t} rows, \textcolor{keywordtype}{size\_t} cols);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{34   Object \&\mbox{\hyperlink{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}{at}}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} col);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{42   \textcolor{keyword}{const} Object \&\mbox{\hyperlink{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}{at}}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} col) \textcolor{keyword}{const};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{47   \mbox{\hyperlink{class_matrix_af522ba0e72c113405e81e0314d7768e8}{\string~Matrix}}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53   \mbox{\hyperlink{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}{Matrix}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&m); \textcolor{comment}{// Copy constructor}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{58   \mbox{\hyperlink{class_matrix_a9153c0cb9e3221a05fe94097ea60ab7a}{Matrix}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&\&m) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{64   \mbox{\hyperlink{class_matrix}{Matrix}} \&\mbox{\hyperlink{class_matrix_aa55e06307264cfd92cb3a3cf0aa31744}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&m); \textcolor{comment}{// Assignment operator}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{69   \mbox{\hyperlink{class_matrix}{Matrix}} \&\mbox{\hyperlink{class_matrix_adbbc1f87b9afa1af9e6a2fd670eaadc3}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&\&m) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{75   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_matrix_a3260bf098ed354b19579f0b5cbd9eef4}{numrows}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{81   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_matrix_a3432f6d043667624b60eea2f7895d970}{numcols}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{82 \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object>}
+\DoxyCodeLine{85 \mbox{\hyperlink{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}{Matrix<Object>::Matrix}}(\textcolor{keywordtype}{size\_t} param\_rows, \textcolor{keywordtype}{size\_t} param\_cols)}
+\DoxyCodeLine{86   : rows(param\_rows), cols(param\_cols)}
+\DoxyCodeLine{87 \{}
+\DoxyCodeLine{88   data = \textcolor{keyword}{new} Object[rows * cols];}
+\DoxyCodeLine{89 \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object>}
+\DoxyCodeLine{92 \mbox{\hyperlink{class_matrix_af60c28472d0946fb9ea73a5ec7d56504}{Matrix<Object>::Matrix}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&rhs)}
+\DoxyCodeLine{93     : rows(rhs.rows), cols(rhs.cols)}
+\DoxyCodeLine{94 \{}
+\DoxyCodeLine{95   data = \textcolor{keyword}{new} Object[rows * cols];}
+\DoxyCodeLine{96   copy(rhs.data, rhs.data + rows * cols, data);}
+\DoxyCodeLine{97 \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object>}
+\DoxyCodeLine{100 \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&\mbox{\hyperlink{class_matrix_aa55e06307264cfd92cb3a3cf0aa31744}{Matrix<Object>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_matrix}{Matrix<Object>}} \&rhs)}
+\DoxyCodeLine{101 \{}
+\DoxyCodeLine{102   assert(rows == rhs.rows \&\& cols == rhs.cols);}
+\DoxyCodeLine{103   copy(rhs.data, rhs.data + rows * cols, data);}
+\DoxyCodeLine{104   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{105 \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object> \mbox{\hyperlink{class_matrix_af522ba0e72c113405e81e0314d7768e8}{Matrix<Object>::\string~Matrix}}() \{ \textcolor{keyword}{delete}[] data; \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object> Object \&\mbox{\hyperlink{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}{Matrix<Object>::at}}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} col)}
+\DoxyCodeLine{110 \{}
+\DoxyCodeLine{111   assert(row < rows);}
+\DoxyCodeLine{112   assert(col < cols);}
+\DoxyCodeLine{113   \textcolor{keywordflow}{return} data[cols * row + col];}
+\DoxyCodeLine{114 \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object>}
+\DoxyCodeLine{117 \textcolor{keyword}{const} Object \&\mbox{\hyperlink{class_matrix_a88d81ec0722c0bea36891e7bd2c8a3ae}{Matrix<Object>::at}}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} col)\textcolor{keyword}{ const}}
+\DoxyCodeLine{118 \textcolor{keyword}{}\{}
+\DoxyCodeLine{119   assert(row < rows);}
+\DoxyCodeLine{120   assert(col < cols);}
+\DoxyCodeLine{121   \textcolor{keywordflow}{return} data[cols * row + col];}
+\DoxyCodeLine{122 \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object> \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_matrix_a3260bf098ed354b19579f0b5cbd9eef4}{Matrix<Object>::numrows}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{125 \textcolor{keyword}{}\{}
+\DoxyCodeLine{126   \textcolor{keywordflow}{return} rows;}
+\DoxyCodeLine{127 \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{keyword}{template} <\textcolor{keyword}{class} Object> \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_matrix_a3432f6d043667624b60eea2f7895d970}{Matrix<Object>::numcols}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{130 \textcolor{keyword}{}\{}
+\DoxyCodeLine{131   \textcolor{keywordflow}{return} cols;}
+\DoxyCodeLine{132 \}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
