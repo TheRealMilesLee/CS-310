@@ -150,6 +150,15 @@ void print_memo(const Matrix<int> &memo, const string &first_string,
     cout << endl;
   }
 }
+/**
+ * It takes the memoization matrix, the two strings, and the gap penalty, and then it prints out the
+ * two aligned strings
+ *
+ * @param memo The memoization matrix
+ * @param first_string the first string to be aligned
+ * @param second_string the string that is being aligned to the first string
+ * @param gap the gap penalty
+ */
 
 void traceback(const Matrix<int> &memo, const string &first_string,
                const string &second_string, int gap)
