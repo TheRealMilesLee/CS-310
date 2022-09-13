@@ -214,6 +214,24 @@ void traceback(const Matrix<int> &memo, const string &first_string,
   cout << align_string_1 << endl;
   cout << align_string_2 << endl;
 }
+/**
+ * It returns the maximum of the following three values:
+ *
+ * 1. The value of the cell to the left plus the gap penalty.
+ * 2. The value of the cell above plus the gap penalty.
+ * 3. The value of the cell to the upper left plus the match or mismatch penalty
+ *
+ * @param first_string the first string
+ * @param index_string_1 the index of the first string
+ * @param second_string the second string
+ * @param index_string_2 the index of the second string
+ * @param memo_table a 2D matrix of ints that will be used to store the results of
+ * @param match the score for a match
+ * @param mismatch the cost of a mismatch
+ * @param gap the cost of a gap
+ *
+ * @return The maximum score of the alignment.
+ */
 
 int opt(const string &first_string, size_t index_string_1,
         const string &second_string, size_t index_string_2,
