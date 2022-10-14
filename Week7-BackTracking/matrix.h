@@ -113,6 +113,14 @@ template <class Object> Object &Matrix<Object>::at(size_t row, size_t col)
   return data[cols * row + col];
 }
 
+
+/**
+ * @brief This function is a template that return a matrix
+ * @tparam Object is the matrix object
+ * @param row is the row of the matrix
+ * @param col is the column of the matrix
+ * @return const Object& is the matrix object
+ */
 template <class Object>
 const Object &Matrix<Object>::at(size_t row, size_t col) const
 {
