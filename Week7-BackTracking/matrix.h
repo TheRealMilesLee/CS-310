@@ -121,11 +121,17 @@ const Object &Matrix<Object>::at(size_t row, size_t col) const
   return data[cols * row + col];
 }
 
+/**
+ * This funcntion is a template that returns the rows
+ */
 template <class Object> size_t Matrix<Object>::numrows() const
 {
   return rows;
 }
 
+/**
+ * This function is a template that returns columns
+ */
 template <class Object> size_t Matrix<Object>::numcols() const
 {
   return cols;
