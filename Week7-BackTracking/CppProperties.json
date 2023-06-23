@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "inheritEnvironments": [
+        "mingw_64"
+      ],
+      "name": "Mingw64",
+      "includePath": [
+        "${env.INCLUDE}",
+        "${workspaceRoot}\\**"
+      ],
+      "intelliSenseMode": "linux-gcc-x64",
+      "environments": [
+        {
+          "MINGW64_ROOT": "C:\\ProgramFiles\\mingw64",
+          "BIN_ROOT": "${env.MINGW64_ROOT}\\bin",
+          "FLAVOR": "x86_64-w64-mingw32",
+          "TOOLSET_VERSION": "4.3.5",
+          "PATH": "${env.BIN_ROOT};${env.MINGW64_ROOT}\\..\\usr\\local\\bin;${env.MINGW64_ROOT}\\..\\usr\\bin;${env.MINGW64_ROOT}\\..\\bin;${env.PATH}",
+          "INCLUDE": "${env.MINGW64_ROOT}\\include;${env.MINGW64_ROOT}\\include\\gdb;${env.MINGW64_ROOT}\\include\\libiberty; ${env.FLAVOR}\\bin;${env.FLAVOR}\\include; ${env.FLAVOR}\\lib;",
+          "environment": "mingw_64"
+        }
+      ]
+    }
+  ]
+}
