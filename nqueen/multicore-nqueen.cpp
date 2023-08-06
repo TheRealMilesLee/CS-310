@@ -64,12 +64,12 @@ int main(int argc, char *argv[])
   {
     cout << "Usage: ./" << argv[0] << " n" << endl;
     cout << "       where n is the number of queens to place" << endl;
-    cout << "       on an n x n chessboard, with n < 26" << endl;
+    cout << "       on an n x n chessboard, with n < 100" << endl;
     return 2;
   }
 
   unsigned n = static_cast<unsigned>(stoul(argv[1]));
-  assert(n < 26);
+  assert(n < 100);
   srand(static_cast<unsigned>(time(nullptr)));
 
   vector<unsigned> permutation;
