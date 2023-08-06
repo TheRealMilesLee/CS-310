@@ -39,14 +39,18 @@ mutex mtx;
 bool solution_found = false;
 
 void solve_parallel(vector<unsigned> &permutation, unsigned start,
-                    unsigned end) {
-  while (!solution_found) {
+                    unsigned end)
+{
+  while (!solution_found)
+  {
     random_shuffle(permutation.begin(), permutation.end());
 
     unsigned collisions = get_collisions(permutation);
-    if (collisions == 0) {
+    if (collisions == 0)
+    {
       lock_guard<mutex> lock(mtx);
-      if (!solution_found) {
+      if (!solution_found)
+      {
         print_board(permutation);
         solution_found = true;
       }
@@ -54,8 +58,10 @@ void solve_parallel(vector<unsigned> &permutation, unsigned start,
   }
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 2) {
+int main(int argc, char *argv[])
+{
+  if (argc != 2)
+  {
     cout << "Usage: ./" << argv[0] << " n" << endl;
     cout << "       where n is the number of queens to place" << endl;
     cout << "       on an n x n chessboard, with n < 26" << endl;
@@ -67,7 +73,8 @@ int main(int argc, char *argv[]) {
   srand(static_cast<unsigned>(time(nullptr)));
 
   vector<unsigned> permutation;
-  for (unsigned i = 0; i < n; i++) {
+  for (unsigned i = 0; i < n; i++)
+  {
     permutation.push_back(i);
   }
 
@@ -75,27 +82,33 @@ int main(int argc, char *argv[]) {
   unsigned num_threads = min(MAX_THREADS, n);
   unsigned work_per_thread = n / num_threads;
 
-  for (unsigned i = 0; i < num_threads; ++i) {
+  for (unsigned i = 0; i < num_threads; ++i)
+  {
     unsigned start = i * work_per_thread;
     unsigned end = (i == num_threads - 1) ? n : (i + 1) * work_per_thread;
     threads.emplace_back(solve_parallel, ref(permutation), start, end);
   }
 
-  for (auto &thread : threads) {
+  for (auto &thread : threads)
+  {
     thread.join();
   }
 
   return 0;
 }
 
-unsigned get_collisions(const vector<unsigned> &perm) {
+unsigned get_collisions(const vector<unsigned> &perm)
+{
   unsigned n = static_cast<unsigned>(perm.size());
 
   unsigned collisions = 0;
-  for (unsigned i = 0; i < n - 1; i++) {
-    for (unsigned j = i + 1; j < n; j++) {
+  for (unsigned i = 0; i < n - 1; i++)
+  {
+    for (unsigned j = i + 1; j < n; j++)
+    {
       if (j - i == perm.at(i) - perm.at(j) ||
-          j - i == perm.at(j) - perm.at(i)) {
+          j - i == perm.at(j) - perm.at(i))
+      {
         collisions++;
       }
     }
@@ -103,23 +116,31 @@ unsigned get_collisions(const vector<unsigned> &perm) {
   return collisions;
 }
 
-void hr(unsigned cols) {
+void hr(unsigned cols)
+{
   cout << "    +";
-  for (unsigned col = 0; col < cols; col++) {
+  for (unsigned col = 0; col < cols; col++)
+  {
     cout << "---+";
   }
   cout << endl;
 }
 
-void print_board(const vector<unsigned> &permutation) {
+void print_board(const vector<unsigned> &permutation)
+{
   unsigned n = static_cast<unsigned>(permutation.size());
   hr(n);
-  for (unsigned row = 0; row < n; row++) {
+  for (unsigned row = 0; row < n; row++)
+  {
     cout << ' ' << setw(2) << row << " |";
-    for (unsigned col = 0; col < n; col++) {
-      if (permutation.at(row) == col) {
+    for (unsigned col = 0; col < n; col++)
+    {
+      if (permutation.at(row) == col)
+      {
         cout << " X |";
-      } else {
+      }
+      else
+      {
         cout << "   |";
       }
     }
@@ -128,7 +149,8 @@ void print_board(const vector<unsigned> &permutation) {
   }
 
   cout << "     ";
-  for (unsigned col = 0; col < n; col++) {
+  for (unsigned col = 0; col < n; col++)
+  {
     cout << ' ' << static_cast<char>('a' + col) << "  ";
   }
   cout << endl;
