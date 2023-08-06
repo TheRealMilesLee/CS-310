@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
   }
 
   unsigned n = static_cast<unsigned>(stoul(argv[1]));
-  assert(n < 26);
+  assert(n < 100);
   srand(static_cast<unsigned>(time(nullptr)));
 
   vector<unsigned> permutation;
