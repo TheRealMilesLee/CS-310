@@ -9,7 +9,7 @@
 #include <vector>
 using namespace std;
 
-const unsigned MAX_THREADS = 16; // Maximum number of threads to use
+const unsigned MAX_THREADS = 8; // Maximum number of threads to use
 
 /**
  * count diagonal collisions. the queens on a board are represented by
@@ -43,7 +43,7 @@ void solve_parallel(vector<unsigned> &permutation, unsigned start,
 {
   while (!solution_found)
   {
-    random_shuffle(permutation.begin(), permutation.end());
+   random_shuffle(permutation.begin(), permutation.end());
 
     unsigned collisions = get_collisions(permutation);
     if (collisions == 0)
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
   {
     cout << "Usage: ./" << argv[0] << " n" << endl;
     cout << "       where n is the number of queens to place" << endl;
-    cout << "       on an n x n chessboard, with n < 26" << endl;
+    cout << "       on an n x n chessboard, with n < 100" << endl;
     return 2;
   }
 
