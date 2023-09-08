@@ -9,7 +9,11 @@
 #include <vector>
 using namespace std;
 
-const unsigned MAX_THREADS = 8; // Maximum number of threads to use
+// Global variables
+mutex mtx;
+bool solution_found = false;
+
+const unsigned MAX_THREADS = 16; // Maximum number of threads to use
 
 /**
  * count diagonal collisions. the queens on a board are represented by
@@ -34,29 +38,8 @@ void hr(unsigned cols);
  */
 void print_board(const vector<unsigned> &permutation);
 
-// Global variables
-mutex mtx;
-bool solution_found = false;
-
 void solve_parallel(vector<unsigned> &permutation, unsigned start,
-                    unsigned end)
-{
-  while (!solution_found)
-  {
-   random_shuffle(permutation.begin(), permutation.end());
-
-    unsigned collisions = get_collisions(permutation);
-    if (collisions == 0)
-    {
-      lock_guard<mutex> lock(mtx);
-      if (!solution_found)
-      {
-        print_board(permutation);
-        solution_found = true;
-      }
-    }
-  }
-}
+                    unsigned end);
 
 int main(int argc, char *argv[])
 {
@@ -154,4 +137,24 @@ void print_board(const vector<unsigned> &permutation)
     cout << ' ' << static_cast<char>('a' + col) << "  ";
   }
   cout << endl;
+}
+
+void solve_parallel(vector<unsigned> &permutation, unsigned start,
+                    unsigned end)
+{
+  while (!solution_found)
+  {
+    random_shuffle(permutation.begin(), permutation.end());
+
+    unsigned collisions = get_collisions(permutation);
+    if (collisions == 0)
+    {
+      lock_guard<mutex> lock(mtx);
+      if (!solution_found)
+      {
+        print_board(permutation);
+        solution_found = true;
+      }
+    }
+  }
 }
