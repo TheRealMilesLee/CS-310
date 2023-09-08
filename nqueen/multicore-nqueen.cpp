@@ -7,13 +7,16 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <atomic>
+#include <condition_variable>
+
 using namespace std;
 
 // Global variables
-mutex mtx;
-bool solution_found = false;
-
+std::mutex mtx;
+std::atomic<bool> solution_found(false);
 const unsigned MAX_THREADS = 16; // Maximum number of threads to use
+std::condition_variable solution_cv;
 
 /**
  * count diagonal collisions. the queens on a board are represented by
@@ -38,8 +41,7 @@ void hr(unsigned cols);
  */
 void print_board(const vector<unsigned> &permutation);
 
-void solve_parallel(vector<unsigned> &permutation, unsigned start,
-                    unsigned end);
+bool solve_nqueens(vector<unsigned> &permutation, unsigned n, unsigned col);
 
 int main(int argc, char *argv[])
 {
@@ -55,21 +57,23 @@ int main(int argc, char *argv[])
   assert(n < 100);
   srand(static_cast<unsigned>(time(nullptr)));
 
-  vector<unsigned> permutation;
+  vector<unsigned> permutation(n);
   for (unsigned i = 0; i < n; i++)
   {
-    permutation.push_back(i);
+    permutation[i] = i;
   }
 
   vector<thread> threads;
   unsigned num_threads = min(MAX_THREADS, n);
-  unsigned work_per_thread = n / num_threads;
 
   for (unsigned i = 0; i < num_threads; ++i)
   {
-    unsigned start = i * work_per_thread;
-    unsigned end = (i == num_threads - 1) ? n : (i + 1) * work_per_thread;
-    threads.emplace_back(solve_parallel, ref(permutation), start, end);
+    unsigned col_start = i * n / num_threads;
+    unsigned col_end = (i + 1) * n / num_threads;
+    threads.emplace_back([&, col_start, col_end]
+                         {
+      vector<unsigned> local_permutation = permutation;
+      solve_nqueens(local_permutation, n, col_start); });
   }
 
   for (auto &thread : threads)
@@ -89,8 +93,7 @@ unsigned get_collisions(const vector<unsigned> &perm)
   {
     for (unsigned j = i + 1; j < n; j++)
     {
-      if (j - i == perm.at(i) - perm.at(j) ||
-          j - i == perm.at(j) - perm.at(i))
+      if (j - i == perm[i] - perm[j] || j - i == perm[j] - perm[i])
       {
         collisions++;
       }
@@ -118,7 +121,7 @@ void print_board(const vector<unsigned> &permutation)
     cout << ' ' << setw(2) << row << " |";
     for (unsigned col = 0; col < n; col++)
     {
-      if (permutation.at(row) == col)
+      if (permutation[row] == col)
       {
         cout << " X |";
       }
@@ -139,22 +142,47 @@ void print_board(const vector<unsigned> &permutation)
   cout << endl;
 }
 
-void solve_parallel(vector<unsigned> &permutation, unsigned start,
-                    unsigned end)
+bool is_safe(const vector<unsigned> &permutation, unsigned row, unsigned col)
 {
-  while (!solution_found)
+  for (unsigned i = 0; i < col; i++)
   {
-    random_shuffle(permutation.begin(), permutation.end());
+    if (permutation[i] == row || abs(static_cast<int>(row - permutation[i])) == static_cast<int>(col - i))
+    {
+      return false;
+    }
+  }
+  return true;
+}
 
+bool solve_nqueens(vector<unsigned> &permutation, unsigned n, unsigned col)
+{
+  if (col == n)
+  {
     unsigned collisions = get_collisions(permutation);
     if (collisions == 0)
     {
-      lock_guard<mutex> lock(mtx);
-      if (!solution_found)
       {
-        print_board(permutation);
-        solution_found = true;
+        std::lock_guard<std::mutex> lock(mtx);
+        if (!solution_found)
+        {
+          print_board(permutation);
+          solution_found = true;
+        }
       }
+      solution_cv.notify_all();
+    }
+    return true;
+  }
+
+  bool res = false;
+  for (unsigned i = 0; i < n; i++)
+  {
+    if (is_safe(permutation, i, col))
+    {
+      permutation[col] = i;
+      res = solve_nqueens(permutation, n, col + 1) || res;
+      permutation[col] = 0; // Reset the position for backtracking
     }
   }
+  return res;
 }
