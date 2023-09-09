@@ -1,6 +1,3 @@
-// nqueens via direct NP
-// Jon Beck
-
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
