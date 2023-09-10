@@ -41,6 +41,22 @@ void hr(unsigned cols);
  */
 void print_board(const vector<unsigned> &permutation);
 
+
+/**
+ * The function `solve_nqueens` recursively solves the N-Queens problem by placing queens on a
+ * chessboard and checking for collisions, and prints the first valid solution found.
+ *
+ * @param permutation The `permutation` parameter is a vector of unsigned integers that represents the
+ * current state of the chessboard. Each element in the vector represents the row position of a queen
+ * in a particular column. For example, if `permutation[0] = 2`, it means that there is a queen
+ * @param n The parameter `n` represents the size of the chessboard and the number of queens to be
+ * placed on it.
+ * @param col The parameter "col" represents the current column being considered for placing a queen on
+ * the chessboard. It starts from 0 and increases until it reaches n-1, where n is the size of the
+ * chessboard.
+ *
+ * @return The function `solve_nqueens` returns a boolean value.
+ */
 bool solve_nqueens(vector<unsigned> &permutation, unsigned n, unsigned col);
 
 int main(int argc, char *argv[])
@@ -153,6 +169,7 @@ bool is_safe(const vector<unsigned> &permutation, unsigned row, unsigned col)
   }
   return true;
 }
+
 
 bool solve_nqueens(vector<unsigned> &permutation, unsigned n, unsigned col)
 {
